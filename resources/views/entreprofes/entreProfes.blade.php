@@ -531,20 +531,21 @@
                         style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
                         <div id="QzNMH6qB800ouchQ"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            <ul id="cJj5BpYu9xuprKOS">
-                                <li id="Fr63RFJKWQWJB9Lq"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="bruxLx7m8jSQRoAB" style="color:#000000;">Robótica</span>
-                                </li>
-                                <li id="m3LXCoTh7Ue4Fttr"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="hqm1UxurJGZloJEO" style="color:#000000;">Tecnologías Educativa </span>
-                                </li>
-                                <li id="aXyykbeHKoPJgo6w"
-                                    style="margin-left:1.7em;text-transform:none;color:#000000;list-style-type:disc;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="ekzeWTFoSUGXVRVe" style="color:#000000;">Programación</span><br>
-                                </li>
-                            </ul>
+                            @foreach ($users as $user)
+                                <ul id="VWK7l5LufJKIUsw0">
+                                    @php
+                                        $interests = json_decode($user->interests);
+                                    @endphp
+                                    @if (is_array($interests))
+                                        @foreach ($interests as $interest)
+                                            <li id="{{ $user->id }}"
+                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
+                                                <span>{{ $interest->interest }}</span>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -614,24 +615,21 @@
                         style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
                         <div id="Teu1dT64idmsHdzA"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            <ul id="AXRLid6jVgrkRctQ">
-                                <li id="K9L9IPiKaJtSImiv"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="jWU3jofk9BClH3o9" style="color:#000000;">Coordinador</span><span
-                                        id="YLbUC869zoiK6X49" style="color:#000000;white-space:pre-wrap;"> </span><span
-                                        id="ufRequTbHrwnXKMe" style="color:#000000;">de Proyectos</span>
-                                </li>
-                                <li id="CELmu6vcY0N54oND"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="ZINT0ba5KaQsQ1TD" style="color:#000000;">Docencia Universitaria /
-                                        EDTH</span>
-                                </li>
-                                <li id="ohBKLsQ3Sj9oZ3fk"
-                                    style="margin-left:1.7em;text-transform:none;color:#000000;list-style-type:disc;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="KqtIQLEeP5xsFal7" style="color:#000000;">Automatización de Procesos
-                                        Industriales.</span><br>
-                                </li>
-                            </ul>
+                            @foreach ($users as $user)
+                                <ul id="VWK7l5LufJKIUsw0">
+                                    @php
+                                        $experiences = json_decode($user->experiences);
+                                    @endphp
+                                    @if (is_array($experiences))
+                                        @foreach ($experiences as $experience)
+                                            <li id="{{ $user->id }}"
+                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
+                                                <span>{{ $experience->experience }}</span>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -640,25 +638,22 @@
                         style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
                         <div id="NtQFkZB9ajuTjgDD"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            <ul id="VWK7l5LufJKIUsw0">
-                                @foreach ($users as $user)
-                                    <li id="{{ $user->id }}"
-                                        style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                        <span>{{ $user->skills }}</span>
-                                    </li>
-                                @endforeach
+                            @foreach ($users as $user)
+                                <ul id="VWK7l5LufJKIUsw0">
+                                    @php
+                                        $educations = json_decode($user->educations);
+                                    @endphp
+                                    @if (is_array($educations))
+                                        @foreach ($educations as $education)
+                                            <li id="{{ $user->id }}"
+                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
+                                                <span>{{ $education->education }}</span>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            @endforeach
 
-                                <li id="CtZwclXQ5xxZaXXs"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="qVgt78ILoDG63pKj" style="color:#000000;">Msc. Tecnología Educativa y
-                                        Competencias Digitales</span>
-                                </li>
-                                <li id="OhLjmipONvVWT0hJ"
-                                    style="margin-left:1.7em;text-transform:none;color:#000000;list-style-type:disc;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="zTYFQeGpVXFPNJmq" style="color:#000000;">Esp. Electrónica
-                                        Industrial</span><br>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -667,21 +662,21 @@
                         style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
                         <div id="XB4jHZS6XXOjcfzu"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            <ul id="VWK7l5LufJKIUsw0">
-                                <li id="JhRvqaNGQX8w3xOl"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="WeZu9EsZbBsp2W39" style="color:#000000;"> Tecnologías Educativas </span>
-                                </li>
-                                <li id="CtZwclXQ5xxZaXXs"
-                                    style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="qVgt78ILoDG63pKj" style="color:#000000;">Manejo de Base de Datos</span>
-                                </li>
-                                <li id="OhLjmipONvVWT0hJ"
-                                    style="margin-left:1.7em;text-transform:none;color:#000000;list-style-type:disc;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                    <span id="zTYFQeGpVXFPNJmq" style="color:#000000;">Automatización e Instrumentación de
-                                        Procesos</span><br>
-                                </li>
-                            </ul>
+                            @foreach ($users as $user)
+                                <ul id="VWK7l5LufJKIUsw0">
+                                    @php
+                                        $skills = json_decode($user->skills);
+                                    @endphp
+                                    @if (is_array($skills))
+                                        @foreach ($skills as $skill)
+                                            <li id="{{ $user->id }}"
+                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
+                                                <span>{{ $skill->skill }}</span>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
 

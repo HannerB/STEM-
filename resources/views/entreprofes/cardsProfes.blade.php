@@ -197,13 +197,7 @@
                                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                                     <p id="O0FLNdFHQk4Pz3Tu"
                                                         style="margin-left:0em;text-transform:none;color:#060940;letter-spacing:0em;font-family:YAEnS2G4JLg-0;line-height:1.5em;direction:ltr;text-align:center;">
-                                                        <span id="usukm5xbqUBssXNn" style="color:#060940;">“I had the
-                                                            pleasure of
-                                                            working with Jiara recently, and it was a great experience. She
-                                                            does not
-                                                            stop until she delivers on expectations. I love collaborating
-                                                            with
-                                                            her.”</span><br>
+                                                        <span id="usukm5xbqUBssXNn" style="color:#060940;">"{{ Auth::user()->note }}"</span><br>
                                                     </p>
                                                 </div>
                                             </div>
@@ -229,8 +223,7 @@
                                                     <p id="AYjesRk8VcuGMBOW"
                                                         style="margin-left:0em;text-transform:uppercase;color:#060940;letter-spacing:0.05em;font-family:YAEnS2G4JLg-0;line-height:1.4em;direction:ltr;text-align:center;">
                                                         <span id="aXnI89GfY5cBjGYM"
-                                                            style="color:#060940;font-weight:700;">marketing
-                                                            manager</span><br>
+                                                            style="color:#060940;font-weight:700;">{{ Auth::user()->position }}</span><br>
                                                     </p>
                                                 </div>
                                             </div>

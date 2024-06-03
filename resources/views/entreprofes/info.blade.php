@@ -28,43 +28,50 @@
                             <div class="card-header bg-primary text-white">Editar Perfil</div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('users.update', Auth::user()->id) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('users.update', Auth::user()->id) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
                                     <!-- Campos del formulario -->
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ Auth::user()->name }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="username">Usuario</label>
-                                        <input type="text" class="form-control" id="username" name="username" value="{{ Auth::user()->username }}" required>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            value="{{ Auth::user()->username }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" required>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ Auth::user()->email }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password">Contraseña</label>
                                         <input type="password" class="form-control" id="password" name="password">
-                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña actual.</small>
+                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña
+                                            actual.</small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirmar Contraseña</label>
-                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                            name="password_confirmation">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="url">Imagen de Perfil</label>
                                         <input type="file" class="form-control-file" id="url" name="url">
-                                        @if(Auth::user()->url)
+                                        @if (Auth::user()->url)
                                             <div class="mt-2">
-                                                <img src="{{ Auth::user()->url }}" alt="Imagen de perfil" class="img-thumbnail" width="150">
+                                                <img src="{{ Auth::user()->url }}" alt="Imagen de perfil"
+                                                    class="img-thumbnail" width="150">
                                             </div>
                                         @endif
                                     </div>
@@ -75,60 +82,78 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="position">Posición</label>
-                                        <input type="text" class="form-control" id="position" name="position" value="{{ Auth::user()->position }}" minlength="25">
+                                        <label for="position">Cargo</label>
+                                        <input type="text" class="form-control" id="position" name="position"
+                                            value="{{ Auth::user()->position }}">
                                     </div>
 
-                                    <!-- Mostrar skills si existen -->
-                                    @if(Auth::user()->skills->isNotEmpty())
+                                    <!-- Mostrar skills -->
                                     <div class="form-group">
                                         <label for="skills">Habilidades</label>
-                                        @foreach(Auth::user()->skills as $skill)
-                                            <input type="text" class="form-control mt-2" name="skills[]" value="{{ $skill->skill }}">
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar habilidad</button>
+                                        @if (Auth::user()->skills->isEmpty())
+                                            <input type="text" class="form-control mt-2" name="skills[]">
+                                        @else
+                                            @foreach (Auth::user()->skills as $skill)
+                                                <input type="text" class="form-control mt-2" name="skills[]"
+                                                    value="{{ $skill->skill }}">
+                                            @endforeach
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar
+                                            habilidad</button>
                                         <div id="skill-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar experiences si existen -->
-                                    @if(Auth::user()->experiences->isNotEmpty())
+                                    <!-- Mostrar experiences -->
                                     <div class="form-group">
                                         <label for="experience">Experiencias</label>
-                                        @foreach(Auth::user()->experiences as $experience)
-                                            <input type="text" class="form-control mt-2" name="experiences[]" value="{{ $experience->experience }}">
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addExperience()">Agregar experiencia</button>
+                                        @if (Auth::user()->experiences->isEmpty())
+                                            <input type="text" class="form-control mt-2" name="experiences[]">
+                                        @else
+                                            @foreach (Auth::user()->experiences as $experience)
+                                                <input type="text" class="form-control mt-2" name="experiences[]"
+                                                    value="{{ $experience->experience }}">
+                                            @endforeach
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addExperience()">Agregar experiencia</button>
                                         <div id="experience-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar educations si existen -->
-                                    @if(Auth::user()->educations->isNotEmpty())
+                                    <!-- Mostrar educations -->
                                     <div class="form-group">
                                         <label for="education">Educación</label>
-                                        @foreach(Auth::user()->educations as $education)
-                                            <input type="text" class="form-control mt-2" name="educations[]" value="{{ $education->education }}">
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addEducation()">Agregar educación</button>
+                                        @if (Auth::user()->educations->isEmpty())
+                                            <input type="text" class="form-control mt-2" name="educations[]">
+                                        @else
+                                            @foreach (Auth::user()->educations as $education)
+                                                <input type="text" class="form-control mt-2" name="educations[]"
+                                                    value="{{ $education->education }}">
+                                            @endforeach
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addEducation()">Agregar educación</button>
                                         <div id="education-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar interests si existen -->
-                                    @if(Auth::user()->interests->isNotEmpty())
+                                    <!-- Mostrar interests -->
                                     <div class="form-group">
                                         <label for="interest">Intereses</label>
-                                        @foreach(Auth::user()->interests as $interest)
-                                            <input type="text" class="form-control mt-2" name="interests[]" value="{{ $interest->interest }}">
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addInterest()">Agregar interés</button>
+                                        @if (Auth::user()->interests->isEmpty())
+                                            <input type="text" class="form-control mt-2" name="interests[]">
+                                        @else
+                                            @foreach (Auth::user()->interests as $interest)
+                                                <input type="text" class="form-control mt-2" name="interests[]"
+                                                    value="{{ $interest->interest }}">
+                                            @endforeach
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addInterest()">Agregar interés</button>
                                         <div id="interest-list"></div>
                                     </div>
-                                    @endif
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                     <a href="{{ route('CardsProfes') }}" class="btn btn-secondary">Cancelar</a>
+
                                 </form>
                             </div>
                         </div>
