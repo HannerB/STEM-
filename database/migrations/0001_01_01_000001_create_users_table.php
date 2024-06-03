@@ -21,12 +21,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->string('password');
-            $table->text('note')->nullable(); // Nuevo campo
-            $table->string('position', 255)->nullable(); // Nuevo campo
-            $table->string('interest', 255)->nullable(); // Nuevo campo
-            $table->string('experience', 255)->nullable(); // Nuevo campo
-            $table->string('education', 255)->nullable(); // Nuevo campo
-            $table->string('skills', 255)->nullable(); // Nuevo campo
+            $table->text('note')->nullable(); // Campo de nota
+            $table->string('position', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

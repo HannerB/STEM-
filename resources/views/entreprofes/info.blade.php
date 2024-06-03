@@ -1,9 +1,6 @@
 @extends('app', ['activePage' => 'inicio', 'titlePage' => __('EMPRENDE')])
 
 @section('body')
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5KN7SX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
     <div id="wrapper">
         @include('layouts.navbars.mega-menu')
         <div class="main-area">
@@ -82,24 +79,34 @@
                                         <input type="text" class="form-control" id="position" name="position" value="{{ Auth::user()->position }}" minlength="25">
                                     </div>
 
+                                    <!-- Otros campos... -->
+
                                     <div class="form-group">
-                                        <label for="interest">Interés</label>
-                                        <input type="text" class="form-control" id="interest" name="interest" value="{{ Auth::user()->interest }}" minlength="25">
+                                        <label for="skills">Habilidades</label>
+                                        <input type="text" class="form-control" id="skills" name="skills[]" value="">
+                                        <button type="button" class="btn btn-secondary" onclick="addSkill()">Agregar habilidad</button>
+                                        <div id="skill-list"></div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="experience">Experiencia</label>
-                                        <input type="text" class="form-control" id="experience" name="experience" value="{{ Auth::user()->experience }}" minlength="25">
+                                        <label for="experience">Experiencias</label>
+                                        <input type="text" class="form-control" id="experience" name="experiences[]" value="">
+                                        <button type="button" class="btn btn-secondary" onclick="addExperience()">Agregar experiencia</button>
+                                        <div id="experience-list"></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="education">Educación</label>
-                                        <input type="text" class="form-control" id="education" name="education" value="{{ Auth::user()->education }}" minlength="25">
+                                        <input type="text" class="form-control" id="education" name="educations[]" value="">
+                                        <button type="button" class="btn btn-secondary" onclick="addEducation()">Agregar educación</button>
+                                        <div id="education-list"></div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="skills">Habilidades</label>
-                                        <input type="text" class="form-control" id="skills" name="skills" value="{{ Auth::user()->skills }}" minlength="25">
+                                        <label for="interest">Intereses</label>
+                                        <input type="text" class="form-control" id="interest" name="interests[]" value="">
+                                        <button type="button" class="btn btn-secondary" onclick="addInterest()">Agregar interés</button>
+                                        <div id="interest-list"></div>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -116,4 +123,42 @@
         <div class="menu-fader"></div>
         <a id="scroll-top-btn" href="#" title="Volver arriba">&#8593;</a>
     </div>
+
+    <script>
+        function addSkill() {
+            var skillList = document.getElementById('skill-list');
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'skills[]';
+            newInput.className = 'form-control mt-2';
+            skillList.appendChild(newInput);
+        }
+
+        function addExperience() {
+            var experienceList = document.getElementById('experience-list');
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'experiences[]';
+            newInput.className = 'form-control mt-2';
+            experienceList.appendChild(newInput);
+        }
+
+        function addEducation() {
+            var educationList = document.getElementById('education-list');
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'educations[]';
+            newInput.className = 'form-control mt-2';
+            educationList.appendChild(newInput);
+        }
+
+        function addInterest() {
+            var interestList = document.getElementById('interest-list');
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'interests[]';
+            newInput.className = 'form-control mt-2';
+            interestList.appendChild(newInput);
+        }
+    </script>
 @endsection
