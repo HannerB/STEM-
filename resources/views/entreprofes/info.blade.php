@@ -79,35 +79,53 @@
                                         <input type="text" class="form-control" id="position" name="position" value="{{ Auth::user()->position }}" minlength="25">
                                     </div>
 
-                                    <!-- Otros campos... -->
-
+                                    <!-- Mostrar skills si existen -->
+                                    @if(Auth::user()->skills->isNotEmpty())
                                     <div class="form-group">
                                         <label for="skills">Habilidades</label>
-                                        <input type="text" class="form-control" id="skills" name="skills[]" value="">
-                                        <button type="button" class="btn btn-secondary" onclick="addSkill()">Agregar habilidad</button>
+                                        @foreach(Auth::user()->skills as $skill)
+                                            <input type="text" class="form-control mt-2" name="skills[]" value="{{ $skill->skill }}">
+                                        @endforeach
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar habilidad</button>
                                         <div id="skill-list"></div>
                                     </div>
+                                    @endif
 
+                                    <!-- Mostrar experiences si existen -->
+                                    @if(Auth::user()->experiences->isNotEmpty())
                                     <div class="form-group">
                                         <label for="experience">Experiencias</label>
-                                        <input type="text" class="form-control" id="experience" name="experiences[]" value="">
-                                        <button type="button" class="btn btn-secondary" onclick="addExperience()">Agregar experiencia</button>
+                                        @foreach(Auth::user()->experiences as $experience)
+                                            <input type="text" class="form-control mt-2" name="experiences[]" value="{{ $experience->experience }}">
+                                        @endforeach
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addExperience()">Agregar experiencia</button>
                                         <div id="experience-list"></div>
                                     </div>
+                                    @endif
 
+                                    <!-- Mostrar educations si existen -->
+                                    @if(Auth::user()->educations->isNotEmpty())
                                     <div class="form-group">
                                         <label for="education">Educación</label>
-                                        <input type="text" class="form-control" id="education" name="educations[]" value="">
-                                        <button type="button" class="btn btn-secondary" onclick="addEducation()">Agregar educación</button>
+                                        @foreach(Auth::user()->educations as $education)
+                                            <input type="text" class="form-control mt-2" name="educations[]" value="{{ $education->education }}">
+                                        @endforeach
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addEducation()">Agregar educación</button>
                                         <div id="education-list"></div>
                                     </div>
+                                    @endif
 
+                                    <!-- Mostrar interests si existen -->
+                                    @if(Auth::user()->interests->isNotEmpty())
                                     <div class="form-group">
                                         <label for="interest">Intereses</label>
-                                        <input type="text" class="form-control" id="interest" name="interests[]" value="">
-                                        <button type="button" class="btn btn-secondary" onclick="addInterest()">Agregar interés</button>
+                                        @foreach(Auth::user()->interests as $interest)
+                                            <input type="text" class="form-control mt-2" name="interests[]" value="{{ $interest->interest }}">
+                                        @endforeach
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addInterest()">Agregar interés</button>
                                         <div id="interest-list"></div>
                                     </div>
+                                    @endif
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                     <a href="{{ route('CardsProfes') }}" class="btn btn-secondary">Cancelar</a>
