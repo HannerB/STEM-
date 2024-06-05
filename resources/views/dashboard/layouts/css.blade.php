@@ -8,8 +8,26 @@
 
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/dropzone.css') }}">
 
-<link href="{{ asset('dashboard/css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet" />
-<link href="{{ asset('dashboard/css/material-kit.min.css?v=2.0.7') }}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-dashboard.css?v=2.1.1') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-kit.min.css?v=2.0.7') }}"/>
+
+<style>
+    .dropzone {
+        background-color: #fbfdff;
+        border: 1px dashed #c0ccda;
+        border-radius: 6px;
+        padding: 60px;
+        text-align: center;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .dropzone {
+        box-shadow: 0px 2px 20px 0px #f2f2f2;
+        border-radius: 10px;
+    }
+</style>
 @yield('css')

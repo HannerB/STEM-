@@ -7,6 +7,7 @@
                 <div class="col-md-12">
                     <form action="{{ route('users.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <div class="card">
                             <div class="card-header card-header-info">
                                 <h4 class="card-title">Usuario</h4>
@@ -16,97 +17,65 @@
                                 <div class="row">
                                     <label for="name" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Ingrese su nombre" value="{{ old('name') }}" autofocus>
-                                        @if ($errors->has('name'))
-                                            <span class="error text-danger"
-                                                for="input-name">{{ $errors->first('name') }}</span>
-                                        @endif
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su nombre" value="{{ old('name') }}" autofocus>
+                                        @error('name')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="username"
-                                            placeholder="Ingrese su nombre de usuario" value="{{ old('username') }}">
-                                        @if ($errors->has('username'))
-                                            <span class="error text-danger"
-                                                for="input-username">{{ $errors->first('username') }}</span>
-                                        @endif
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su nombre de usuario" value="{{ old('username') }}">
+                                        @error('username')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="email" class="col-sm-2 col-form-label">Correo</label>
+                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="email"
-                                            placeholder="Ingrese su correo" value="{{ old('email') }}">
-                                        @if ($errors->has('email'))
-                                            <span class="error text-danger"
-                                                for="input-email">{{ $errors->first('email') }}</span>
-                                        @endif
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo" value="{{ old('email') }}">
+                                        @error('email')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
                                     <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password"
-                                            placeholder="Contraseña">
-                                        @if ($errors->has('password'))
-                                            <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
-                                        @endif
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                        @error('password')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="url" name="url" class="col-sm-2 col-form-label">Imagen</label>
+                                    <label for="url" class="col-sm-2 col-form-label">Imagen</label>
                                     <div class="col-sm-7">
                                         <input type="file" class="form-control" id="url" name="url" accept="image/*">
-                                        @if ($errors->has('url'))
-                                            <span class="error text-danger" for="input-url">{{ $errors->first('url') }}</span>
-                                        @endif
+                                        @error('url')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="roles" class="col-sm-2 col-form-label">Roles</label>
+                                    <label for="role_id" class="col-sm-2 col-form-label">Roles</label>
                                     <div class="col-sm-7">
-                                        <div class="form-group">
-                                            <div class="tab-content">
-                                                <div class="tab-pane active">
-                                                    <table class="table">
-                                                        <tbody>
-                                                            @foreach ($roles as $role)
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <label class="form-check-label">
-                                                                            <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->id }}">
-                                                                            <span class="form-check-sign">
-                                                                                <span class="check"></span>
-                                                                            </span>
-                                                                        </label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    {{ $role->name }}
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
-                                                            @if ($errors->has('roles'))
-                                                                <span class="error text-danger" for="input-roles">{{ $errors->first('roles') }}</span>
-                                                            @endif
-                                                            
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <select id="role_id" name="role_id" class="form-control">
+                                            @foreach($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('role_id')
+                                            <span class="error text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                            <div class="card-footer ml-auto mr-auto">
-                                <a href="{{ route('users.index') }}"type="submit" class="btn  btn-danger">Cancelar</a>
+                                <a href="{{ route('users.index') }}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>
