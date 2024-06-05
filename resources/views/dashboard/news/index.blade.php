@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table">
                                 <thead class="text-info">
                                     <th>ID</th>
                                     <th>Título</th>
@@ -36,13 +36,9 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->title }}</td>
-                                            <td><img src="{{ asset($item->url) }}" alt="{{ $item->slug }}" style="max-width: 100px;"></td>
+                                            <td><img src="{{ asset($item->url) }}" alt="Imagen de noticia" style="max-width: 100px;"></td>
                                             <td>{{ $item->date_of_the_new_story }}</td>
-                                            <td>
-                                                <span class="badge {{ $item->state == 1 ? 'badge-success' : 'badge-danger' }}">
-                                                    {{ $item->state == 1 ? 'Activo' : 'Inactivo' }}
-                                                </span>
-                                            </td>
+                                            <td>{{ $item->state == 1 ? 'Activo' : 'Inactivo' }}</td>
                                             <td class="td-actions text-right">
                                                 <a href="{{ route('news.show', $item->id) }}" class="btn btn-info" title="Ver detalles"><i class="material-icons">person</i></a>
                                                 <a href="{{ route('news.edit', $item->id) }}" class="btn btn-warning" title="Editar"><i class="material-icons">edit</i></a>

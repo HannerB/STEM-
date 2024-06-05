@@ -1,3 +1,4 @@
+
 @extends('app', ['activePage' => 'inicio', 'titlePage' => __('EMPRENDE')])
 
 @section('body')
@@ -8,23 +9,34 @@
 
             <head>
                 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-                <style>
-                    .custom-form-container {
-                        border: 1px solid #ddd;
-                        padding: 30px;
-                        border-radius: 10px;
-                        background-color: #f9f9f9;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                        max-width: 800px;
-                        margin: 20px auto;
-                    }
-                </style>
+                <head>
+                    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+                    <style>
+                        .custom-form-container {
+                            border: 1px solid #ddd;
+                            padding: 40px; /* Increased padding for more space */
+                            border-radius: 10px;
+                            background-color: #f9f9f9;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        }
+                        .custom-form-container form * {
+                          font-size: 1.2rem; /* Change the font-size value as needed */
+                        }
+                        .custom-form-container label {
+                          font-size: 1.4rem;
+                        }
+                        .custom-form-container input[type="text"],
+                        .custom-form-container input[type="email"],
+                        .custom-form-container textarea {
+                          font-size: 1rem; /* Adjust for input fields */
+                        }
+                    </style>
+                </head>
             </head>
 
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="card custom-form-container">
+                    <div class="col-lg-10">  <div class="card custom-form-container">
                             <div class="card-header bg-primary text-white">Editar Perfil</div>
 
                             <div class="card-body">
@@ -66,15 +78,30 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="url">Imagen de Perfil</label>
-                                        <input type="file" class="form-control-file" id="url" name="url">
-                                        @if (Auth::user()->url)
-                                            <div class="mt-2">
-                                                <img src="{{ Auth::user()->url }}" alt="Imagen de perfil"
-                                                    class="img-thumbnail" width="150">
-                                            </div>
-                                        @endif
+                                        <label for="profile-picture">Imagen de Perfil</label>
+                                        <input type="text" class="form-control" id="profile-picture" name="profile-picture" readonly>
+                                        <button type="button" class="btn btn-primary mt-2" id="generate-picture">Generar Foto Aleatoria</button>
+                                        <div id="preview" class="mt-2"></div>
                                     </div>
+
+                                    <script>
+                                        document.getElementById('generate-picture').addEventListener('click', function() {
+                                            fetch('https://source.unsplash.com/random')
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error('Network response was not ok');
+                                                    }
+                                                    return response.url;
+                                                })
+                                                .then(url => {
+                                                    document.getElementById('profile-picture').value = url;
+                                                    document.getElementById('preview').innerHTML = '<img src="' + url + '" class="img-thumbnail" width="150" alt="Imagen de perfil">';
+                                                })
+                                                .catch(error => {
+                                                    console.error('There was a problem with the fetch operation:', error);
+                                                });
+                                        });
+                                    </script>
 
                                     <div class="form-group">
                                         <label for="note">Nota</label>
@@ -153,7 +180,6 @@
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                     <a href="{{ route('CardsProfes') }}" class="btn btn-secondary">Cancelar</a>
-
                                 </form>
                             </div>
                         </div>

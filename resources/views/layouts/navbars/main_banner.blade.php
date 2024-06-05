@@ -24,9 +24,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('loginProfes') }}">
-                        EntreProfes
-                    </a>
+                    @if (Auth::check())
+                        <a href="{{ route('CardsProfes') }}">
+                            EntreProfes
+                        </a>
+                    @else
+                        <a href="{{ route('loginProfes') }}">
+                            EntreProfes
+                        </a>
+                    @endif
                 </li>
                 <li>
                     <a href="">

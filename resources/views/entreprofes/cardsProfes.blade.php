@@ -76,8 +76,7 @@
                                                 style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
                                                 <div id="C31ShfrVKdAG8YlV"
                                                     style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                                                    <img src="images/64f3cc338fd420e35789b7e3607fbbfc.svg" alt="Search Bar"
-                                                        loading="lazy"
+                                                    <img src="{{ asset('images/5') }}" alt="Search Bar" loading="lazy"
                                                         style="display:block;object-fit:cover;width:100%;height:100%;">
                                                 </div>
                                             </div>
@@ -126,8 +125,7 @@
                                                 <p id="up8EedJElG8tGNaB"
                                                     style="margin-left:0em;color:#ffffff;font-family:YAEnS2G4JLg-0;line-height:1.4em;direction:ltr;text-align:center;">
                                                     <a id="GOWHPfezXNV4xwti" target="_self" rel="noopener"
-                                                        {{-- href="https://stem-is.my.canva.site/stem-is-website-entre-profes-jair" --}}
-                                                        href="{{ route('EntreProfes') }}"
+                                                        {{-- href="https://stem-is.my.canva.site/stem-is-website-entre-profes-jair" --}} href="{{ route('EntreProfes') }}"
                                                         style="text-decoration-line:underline;color:#ffffff;font-weight:700;font-style:normal;pointer-events:all;"
                                                         data-interstitial-link="">Douglas Galveston</a>
                                                 </p>
@@ -162,7 +160,9 @@
                                                         style="clip-path:path(&#x27;M500 250.002c0 138.065-111.931 249.996-250 249.996-138.071 0-250-111.931-250-249.996C0 111.93 111.929 0 250 0s250 111.93 250 250.002z&#x27;);">
                                                         <div id="hibCGhu1bKQlYxi0"
                                                             style="transform:scale(1, 1);transform-origin:250px 250px;">
-                                                            <img src="{{ asset('images/8351af0c3a2c0afe1909a1065b11d5ce.webp') }}" title="imagen" loading="lazy" style="transform: translate(-4.65969453px, 0px) rotate(0deg); display: block; object-fit: fill; width: 524.64115988px; transform-origin: 262.32057994px 393.48086991px; opacity: 1.0; height: 786.96173982px;">
+                                                            <img src="{{ asset('images/8351af0c3a2c0afe1909a1065b11d5ce.webp') }}"
+                                                                title="imagen" loading="lazy"
+                                                                style="transform: translate(-4.65969453px, 0px) rotate(0deg); display: block; object-fit: fill; width: 524.64115988px; transform-origin: 262.32057994px 393.48086991px; opacity: 1.0; height: 786.96173982px;">
                                                         </div>
                                                     </div>
                                                 </foreignobject>
@@ -197,20 +197,23 @@
                                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                                     <p id="O0FLNdFHQk4Pz3Tu"
                                                         style="margin-left:0em;text-transform:none;color:#060940;letter-spacing:0em;font-family:YAEnS2G4JLg-0;line-height:1.5em;direction:ltr;text-align:center;">
-                                                        <span id="usukm5xbqUBssXNn" style="color:#060940;">"{{ Auth::user()->note }}"</span><br>
+                                                        <span id="usukm5xbqUBssXNn"
+                                                            style="color:#060940;">"{{ Auth::user()->note }}"</span><br>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="DGoR6kg95FkzjLtX" style="z-index:11;">
-                                            <div id="npsyvQOQpnckn0ve" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
-                                                <div id="LiUS3WIouiyXwz6M" style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                                                    <p id="DSkfjZwK7S10pADI" style="margin-left:0em;color:#ffffff;font-family:YAEnS2G4JLg-0;line-height:1.4em;direction:ltr;text-align:center;">
+                                            <div id="npsyvQOQpnckn0ve"
+                                                style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                                                <div id="LiUS3WIouiyXwz6M"
+                                                    style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
+                                                    <p id="DSkfjZwK7S10pADI"
+                                                        style="margin-left:0em;color:#ffffff;font-family:YAEnS2G4JLg-0;line-height:1.4em;direction:ltr;text-align:center;">
                                                         <a id="GOWHPfezXNV4xwti" target="_self" rel="noopener"
-                                                        {{-- href="https://stem-is.my.canva.site/stem-is-website-entre-profes-jair" --}}
-                                                        href="{{ route('EntreProfes') }}"
-                                                        style="text-decoration-line:underline;color:#ffffff;font-weight:700;font-style:normal;pointer-events:all;"
-                                                        data-interstitial-link="">{{ Auth::user()->name }}</a>
+                                                            {{-- href="https://stem-is.my.canva.site/stem-is-website-entre-profes-jair" --}} href="{{ route('EntreProfes') }}"
+                                                            style="text-decoration-line:underline;color:#ffffff;font-weight:700;font-style:normal;pointer-events:all;"
+                                                            data-interstitial-link="">{{ Auth::user()->name }}</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -244,10 +247,10 @@
                                                         style="clip-path:path(&#x27;M500 250.002c0 138.065-111.931 249.996-250 249.996-138.071 0-250-111.931-250-249.996C0 111.93 111.929 0 250 0s250 111.93 250 250.002z&#x27;);">
                                                         <div id="Mj2nFnhydqw9lEND"
                                                             style="transform:scale(1, 1);transform-origin:250px 250px;">
-                                                            <img src="images/fbf575996a645d7c06995002b3d94f52.jpg"
-                                                                alt="A Woman in Black Leather Jacket" loading="lazy"
+                                                            <img id="randomImage" alt="Imagen aleatoria" loading="lazy"
                                                                 style="transform:translate(-46.64146413px, -190.29904979px) rotate(0deg);display:block;object-fit:fill;width:637.05414845px;transform-origin:318.52707423px 477.79061134px;opacity:1.0;height:955.58122268px;">
                                                         </div>
+
                                                     </div>
                                                 </foreignobject>
                                             </g>
@@ -262,6 +265,25 @@
 
             </html>
         </div>
+
+        <script>
+            const imageElement = document.getElementById('randomImage');
+            const imageSources = [
+                // Replace with your desired image sources
+                "https://picsum.photos/200/300",
+                "https://placeimg.com/640/480/abstract",
+                "https://www.pexels.com/search/random/"
+            ];
+
+            function getRandomImage() {
+                const randomIndex = Math.floor(Math.random() * imageSources.length);
+                const randomImageURL = imageSources[randomIndex];
+                imageElement.src = randomImageURL;
+            }
+
+            // Call getRandomImage on page load
+            window.addEventListener('load', getRandomImage);
+        </script>
 
 
 

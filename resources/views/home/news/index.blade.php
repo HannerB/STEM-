@@ -36,7 +36,12 @@
             <figure class="info-item">
                 <div class="img">
                     <a href="{{ route('home.show', ['slug' => Str::slug($item->slug)]) }}">
-                        <img src="{{ asset($item->url) }}"  class="img-responsive attachment-medium size-medium wp-post-image" alt="{{ $item->slug }}" loading="lazy" srcset="{{ asset($item->url) }} 768w, {{ asset($item->url) }} 1920w" sizes="(max-width: 768px) 100vw, 768px" />
+
+                        <img src="{{ asset($item->url) }}"
+                            class="img-responsive attachment-medium size-medium wp-post-image"
+                            alt="Cómo llegar a Barranquilla" loading="lazy"
+                            srcset="{{ asset($item->url) }} 768w, {{ asset($item->url) }} 1920w"
+                            sizes="(max-width: 768px) 100vw, 768px" />
                     </a>
                 </div>
                 <figcaption>

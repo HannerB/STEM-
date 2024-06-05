@@ -1,6 +1,11 @@
 <figure class="main-banner type3">
     <div class="img">
-        <img src="{{ $news->url }}" class="img-responsive attachment-full size-full wp-post-image" alt="{{ $news->slug }}" title="Cocineras de Barrio Abajo preparan su camino como empresarias del sector gastronómico" srcset="{{ $news->url }} 2560w, {{ $news->url }} 768w, {{ $news->url }} 1920w, {{ $news->url }} 1536w, {{ $news->url }} 2048w" sizes="(max-width: 2560px) 100vw, 2560px" />
+        <img src="{{ $news->url }}"
+            class="img-responsive attachment-full size-full wp-post-image"
+            alt="Grupo de beneficiarias de Negocios con Sazón"
+            title="Cocineras de Barrio Abajo preparan su camino como empresarias del sector gastronómico"
+            srcset="{{ $news->url }} 2560w, {{ $news->url }} 768w, {{ $news->url }} 1920w, {{ $news->url }} 1536w, {{ $news->url }} 2048w"
+            sizes="(max-width: 2560px) 100vw, 2560px" />
     </div><!-- end img -->
 </figure><!-- end main-banner -->
 <div class="main-area">
@@ -16,15 +21,13 @@
                     <header class="head-box">
                         <div class="hidden-xs">
                             <ul class="socials-list">
-                                <li>
-                                    <a class="twitter" href="https://twitter.com/share?url=https://www.barranquilla.gov.co/mi-barranquilla/cocineras-de-barrio-abajo-preparan-su-camino-como-empresarias-del-sector-gastronomico&text=Alcaldía BAQ: &via=alcaldiabquilla" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        twitter
-                                    </a>
+                                <li><a class="twitter"
+                                        href="https://twitter.com/share?url=https://www.barranquilla.gov.co/mi-barranquilla/cocineras-de-barrio-abajo-preparan-su-camino-como-empresarias-del-sector-gastronomico&text=Alcaldía BAQ: &via=alcaldiabquilla"
+                                        onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">twitter</a>
                                 </li>
-                                <li>
-                                    <a class="facebook" href="http://www.facebook.com/share.php?u=https://www.barranquilla.gov.co/mi-barranquilla/cocineras-de-barrio-abajo-preparan-su-camino-como-empresarias-del-sector-gastronomico" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        facebook
-                                    </a>
+                                <li><a class="facebook"
+                                        href="http://www.facebook.com/share.php?u=https://www.barranquilla.gov.co/mi-barranquilla/cocineras-de-barrio-abajo-preparan-su-camino-como-empresarias-del-sector-gastronomico"
+                                        onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">facebook</a>
                                 </li>
                             </ul>
                         </div>
