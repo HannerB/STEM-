@@ -4683,8 +4683,8 @@ tbody.collapse.show {
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #2176bd;
-    border-color: #2176bd
+    background-color: #9c27b0;
+    border-color: #9c27b0
 }
 
 .page-item.disabled .page-link {
@@ -14168,10 +14168,10 @@ textarea {
 .pagination>.page-item.active>span,
 .pagination>.page-item.active>span:focus,
 .pagination>.page-item.active>span:hover {
-    background-color: #00acec;
-    border-color: #00acec;
+    background-color: #9c27b0;
+    border-color: #9c27b0;
     color: #fff;
-    box-shadow: 0 4px 5px 0 rgba(33, 150, 243, .14), 0 1px 10px 0 rgba(33, 150, 243, .15), 0 2px 4px -1px rgba(33, 150, 243, .2)
+    box-shadow: 0 4px 5px 0 rgba(156, 39, 176, .14), 0 1px 10px 0 rgba(156, 39, 176, .12), 0 2px 4px -1px rgba(156, 39, 176, .2)
 }
 
 .pagination.pagination-info>.page-item.active>a,
