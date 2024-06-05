@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Gate;
@@ -13,66 +14,56 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $users = User::paginate(5);
         return view('dashboard.users.index', compact('users'));
     }
 
-    public function create()
-    {
+    public function create() {
         $roles = Role::all();
         return view('dashboard.users.create', compact('roles'));
     }
 
-    public function store(UserRequest $request)
-    {
-        $validator = $request->validated();
+    public function store(Request $request)
+{
+    try {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'role_id' => 'required|exists:roles,id',
+            'url' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+        ]);
 
+        // Verificar si hay una imagen adjunta y guardarla si es así
         if ($request->hasFile('url')) {
-            $imagePath = $request->file('url')->store('public/img');
-            $img = Storage::url($imagePath);
+            // Obtener el nombre original del archivo
+            $imageName = $request->file('url')->getClientOriginalName();
+            // Guardar la imagen en el sistema de archivos
+            $imagePath = $request->file('url')->storeAs('public/img', $imageName);
+            // Obtener la URL pública de la imagen guardada
+            $imageUrl = Storage::url($imagePath);
         } else {
-            $img = null;
+            $imageUrl = null; // Si no se adjunta ninguna imagen, establecerla como nula
         }
 
         $user = User::create([
-            'name' => $validator['name'],
-            'username' => $validator['username'],
-            'email' => $validator['email'],
-            'password' => bcrypt($validator['password']),
-            'url' => $img,
-            'note' => $validator['note'] ?? null,
-            'position' => $validator['position'] ?? null,
-            'role_id' => $request->input('role_id'), // Añadir role_id
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
+            'url' => $imageUrl, // Guardar la URL de la imagen en la base de datos
         ]);
 
-        if ($request->has('skills')) {
-            foreach ($request->input('skills') as $skill) {
-                $user->skills()->create(['skill' => $skill]);
-            }
-        }
-
-        if ($request->has('experiences')) {
-            foreach ($request->input('experiences') as $experience) {
-                $user->experiences()->create(['experience' => $experience]);
-            }
-        }
-
-        if ($request->has('educations')) {
-            foreach ($request->input('educations') as $education) {
-                $user->educations()->create(['education' => $education]);
-            }
-        }
-
-        if ($request->has('interests')) {
-            foreach ($request->input('interests') as $interest) {
-                $user->interests()->create(['interest' => $interest]);
-            }
-        }
-
-        return redirect()->route('CardsProfes')->with('success', 'Usuario creado exitosamente');
+        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Ha ocurrido un error al crear el usuario: ' . $e->getMessage());
     }
+}
+
+
 
     public function show(User $user)
     {

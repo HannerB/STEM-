@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->string('password');
-            $table->text('note')->nullable(); // Campo de nota
+            $table->text('note')->nullable();
             $table->string('position', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -51,9 +51,5 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColumn('role_id');
-        });
     }
 };
