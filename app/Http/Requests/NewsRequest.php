@@ -27,11 +27,9 @@ class NewsRequest extends FormRequest
             'content' => 'required|string',
             'slug' => 'string',
             'date_of_the_new_story' => 'required|date',
-            'url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048', 
+            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ];
-        
     }
-    
 
     /**
      * Get the error messages for the defined validation rules.

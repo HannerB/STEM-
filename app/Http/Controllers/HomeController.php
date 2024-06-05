@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function show($slug) {
        
-        $news = News::where('slug', $slug)->where('state', 1)->firstOrFail();
+        $news = News::where('slug', $slug)->firstOrFail();
         return view('home.newsshow', compact('news'));
     }
 
