@@ -40,18 +40,27 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <th><img src="{{ asset($user->url) }}" alt="Imagen de usuario"
-                                                style="max-width: 100px;"></th>
-                                        <td>{{ $user->state == 1 ? 'Activo' : 'Inactivo' }}</td>
+                                        <td>
+                                            @if ($user->url)
+                                                <img src="{{ asset($user->url) }}" alt="{{ $user->name }}" style="max-width: 100px;">
+                                            @else
+                                                <i class="material-icons" style="font-size: 50px;">person</i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <span class="badge {{ $user->state == 1 ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $user->state == 1 ? 'Activo' : 'Inactivo' }}
+                                            </span>
+                                        </td>
                                         <td>
                                             @if ($user->role)
-                                            <span class="badge badge-info">
-                                                {{ $user->role->name }}
-                                            </span>
+                                                <span class="badge badge-info">
+                                                    {{ $user->role->name }}
+                                                </span>
                                             @else
-                                            <span class="badge badge-danger">
-                                                No roles
-                                            </span>
+                                                <span class="badge badge-danger">
+                                                    No roles
+                                                </span>
                                             @endif
                                         </td>
                                         <td class="td-actions text-right">
