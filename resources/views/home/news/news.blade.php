@@ -25,7 +25,7 @@
                                 <li>
                                     <figure class="img">
                                         <a class="" href="{{ route('home.show', ['slug' => Str::slug($item->slug)]) }}">
-                                            <img src="{{ asset($item->url) }}" class="img-responsive attachment-medium size-medium wp-post-image" alt="Reconocimiento empresas sello BAQin" srcset="{{ asset($item->url) }} 768w, {{ asset($item->url) }} 1920w, {{ asset($item->url) }} 1536w, {{ asset($item->url) }} 2048w" sizes="(max-width: 768px) 100vw, 768px" />
+                                            <img src="{{ asset($item->url) }}" class="img-responsive attachment-medium size-medium wp-post-image" alt="{{ $item->slug }}" srcset="{{ asset($item->url) }} 768w, {{ asset($item->url) }} 1920w, {{ asset($item->url) }} 1536w, {{ asset($item->url) }} 2048w" sizes="(max-width: 768px) 100vw, 768px" />
                                         </a>
                                     </figure>
                                     <time datetime="{{ $item->date_of_the_new_story }}">
