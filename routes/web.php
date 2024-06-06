@@ -32,3 +32,4 @@ Route::match(['get','post'], '/cardsProfes', [UserController::class, 'CardsProfe
 Route::match(['get', 'post'], '/EntreProfes', [UserController::class, 'EntreProfes'])->name('EntreProfes');
 
 
+Route::get('user/{user}/profile-image', [UserController::class, 'getProfileImage'])->name('user.profile.image');

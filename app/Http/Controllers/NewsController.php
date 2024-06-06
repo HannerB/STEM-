@@ -34,9 +34,7 @@ class NewsController extends Controller {
         
         // Generar el slug a partir del título
         $slug = Str::slug($request->input('title'));
-    
       
-    
         // Crear una nueva instancia de News con el slug generado
         $news = new News([
             'title' => $request->input('title'),
@@ -51,6 +49,8 @@ class NewsController extends Controller {
         $news->save();
         return response()->json(['id' => $news->id, 'success' => true]);
     }
+    
+    
 
     public function show(News $news) {
         return view('dashboard.news.show', compact('news'));
@@ -91,13 +91,22 @@ class NewsController extends Controller {
             // En caso de error, redirigir con un mensaje de error
             return redirect()->back()->withInput()->withErrors(['error' => 'Error al actualizar la noticia: ' . $e->getMessage()]);
         }
+
+        $news->update($data);
+
+        return redirect()->route('news.index')->with('success', 'Noticia actualizada exitosamente.');
+    }
+
+    public function deactivate(News $news) {
+        $news->update(['state' => 0]);
+
+        return redirect()->route('news.index')->with('success', 'Noticia desactivada exitosamente.');
     }
     public function deactivate(News $news) {
         $news->update(['state' => 0]);
 
         return redirect()->route('news.index')->with('success', 'Noticia desactivada exitosamente.');
     }
-
     public function activate(News $news) {
         try {
             $news->update(['state' => 1]);
