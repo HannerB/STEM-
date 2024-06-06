@@ -5,65 +5,86 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     public function index() {
-        $users = User::paginate(5);
-        return view('dashboard.users.index', compact('users'));
+        try {
+            $users = User::paginate(5);
+            return view('dashboard.users.index', compact('users'));
+        } 
+        catch (\Exception $e) {
+            abort(500, 'Error interno del servidor.');
+        }
     }
 
     public function create() {
-        $roles = Role::all();
-        return view('dashboard.users.create', compact('roles'));
-    }
-
-    public function store(Request $request)
-{
-    try {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'role_id' => 'required|exists:roles,id',
-            'url' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
-        ]);
-
-        // Verificar si hay una imagen adjunta y guardarla si es así
-        if ($request->hasFile('url')) {
-            // Obtener el nombre original del archivo
-            $imageName = $request->file('url')->getClientOriginalName();
-            // Guardar la imagen en el sistema de archivos
-            $imagePath = $request->file('url')->storeAs('public/img', $imageName);
-            // Obtener la URL pública de la imagen guardada
-            $imageUrl = Storage::url($imagePath);
-        } else {
-            $imageUrl = null; // Si no se adjunta ninguna imagen, establecerla como nula
+        try {
+            $roles = Role::all();
+            return view('dashboard.users.create', compact('roles'));
+        } 
+        catch (\Exception $e) {
+            abort(500, 'Error interno del servidor.');
         }
-
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $request->role_id,
-            'url' => $imageUrl, // Guardar la URL de la imagen en la base de datos
-        ]);
-
-        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Ha ocurrido un error al crear el usuario: ' . $e->getMessage());
     }
-}
 
+    public function store(UserRequest $request) {
+        try {
+            $validator = $request->validated();
 
+            $img = null;
+            if ($request->hasFile('url') && $request->file('url')->isValid()) {
+                $imagePath = $request->file('url')->store('public/img');
+                $img = Storage::url($imagePath);
+            }
+
+            $user = User::create([
+                'name' => $validator['name'],
+                'username' => $validator['username'],
+                'email' => $validator['email'],
+                'password' => bcrypt($validator['password']),
+                'url' => $img,
+                'note' => $validator['note'] ?? null,
+                'position' => $validator['position'] ?? null,
+                'role_id' => $request->input('role_id'),
+            ]);
+
+            if ($request->has('skills')) {
+                foreach ($request->input('skills') as $skill) {
+                    $user->skills()->create(['skill' => $skill]);
+                }
+            }
+
+            if ($request->has('experiences')) {
+                foreach ($request->input('experiences') as $experience) {
+                    $user->experiences()->create(['experience' => $experience]);
+                }
+            }
+
+            if ($request->has('educations')) {
+                foreach ($request->input('educations') as $education) {
+                    $user->educations()->create(['education' => $education]);
+                }
+            }
+
+            if ($request->has('interests')) {
+                foreach ($request->input('interests') as $interest) {
+                    $user->interests()->create(['interest' => $interest]);
+                }
+            } 
+
+            $user->roles()->attach($request->input('roles'));
+
+            return redirect()->route('users.show', $user->id)->with('success', 'Usuario creado exitosamente.');
+        } 
+        catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
 
     public function show(User $user)
     {
@@ -191,7 +212,7 @@ class UserController extends Controller
         return view('entreProfes.EntreProfes', compact('users'));
     }
 
-    public function CardsProfes(Request $request)
+    public function CardsProfes(Request $request, User $user)
     {
         if ($request->isMethod('post')) {
             $credentials = $request->only('email', 'password');
@@ -203,6 +224,6 @@ class UserController extends Controller
             }
         }
 
-        return view('entreprofes.cardsProfes');
+        return view('entreprofes.cardsProfes', compact('user'));
     }
 }

@@ -5,149 +5,100 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Illuminate\Support\Str;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\UpdateNewsRequest;
 use Illuminate\Support\Facades\Storage;
 
-class NewsController extends Controller
-{
-    /**
-     * Muestra una lista paginada de noticias.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function index()
-    {
-        try {
-            $news = News::paginate(5);
-            return view('dashboard.news.index', compact('news'));
-        } catch (\Exception $e) {
-            abort(500, 'Error interno del servidor.');
-        }
+class NewsController extends Controller {
+    public function index() {
+        $news = News::paginate(5);
+        return view('dashboard.news.index', compact('news'));
     }
-
-    /**
-     * Muestra el formulario para crear una nueva noticia.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function create()
-    {
+    
+    public function create() {
         return view('dashboard.news.create');
     }
 
-    /**
-     * Almacena una nueva noticia en la base de datos.
-     *
-     * @param  \App\Http\Requests\NewsRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(NewsRequest $request) {
-        try {
-            if ($request->hasFile('url') && $request->file('url')->isValid()) {
-                $imagePath = $request->file('url')->store('public/img');
-                $img = Storage::url($imagePath); // Esto genera la URL correcta para la imagen
-            } else {
-                throw new \Exception('Error al cargar el archivo.');
-            }
+        // Verificar si el archivo 'url' se ha cargado y es válido
+        if ($request->hasFile('url') && $request->file('url')->isValid()) {
+            $imagePath = $request->file('url')->store('public/img');
+            $img = Storage::url($imagePath);
+        } else {
+            return redirect()->back()->withInput()->withErrors(['url' => 'Error al cargar el archivo.']);
+        }
+        
+        // Verificar si el título está presente y es válido
+        if (!$request->filled('title')) {
+            return redirect()->back()->withInput()->withErrors(['title' => 'El título es obligatorio']);
+        }
+        
+        // Generar el slug a partir del título
+        $slug = Str::slug($request->input('title'));
     
-            $slug = Str::slug($request->input('title'));
+      
     
-            $news = new News([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'content' => $request->input('content'),
-                'slug' => $slug,
-                'date_of_the_new_story' => $request->input('date_of_the_new_story'),
-                'url' => $img,
-            ]);
-    
-            $news->save();
-    
-            return response()->json([ 'success' => 'se a guardado corecta mente', 'redirect' => route('news.index')]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
-        }           
+        // Crear una nueva instancia de News con el slug generado
+        $news = new News([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'content' => $request->input('content'),
+            'slug' => $slug, 
+            'date_of_the_new_story' => $request->input('date_of_the_new_story'),
+            'url' => $img,
+        ]);
+     
+        // Guardar la nueva noticia
+        $news->save();
+        return response()->json(['id' => $news->id, 'success' => true]);
     }
 
-
-    /**
-     * Muestra una noticia específica.
-     *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function show(News $news)
-    {
+    public function show(News $news) {
         return view('dashboard.news.show', compact('news'));
     }
 
-    /**
-     * Muestra el formulario para editar una noticia.
-     *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function edit(News $news)
-    {
+    public function edit(News $news) {
         return view('dashboard.news.edit', compact('news'));
     }
 
-    /**
-     * Actualiza una noticia existente en la base de datos.
-     *
-     * @param  \App\Http\Requests\NewsRequest  $request
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(NewsRequest $request, News $news) {
-        try {
-            $validatedData = $request->validated(); // Obtener los datos validados del formulario
+    public function update(UpdateNewsRequest $request, News $news) {
+        // Validar otros campos si lo necesitas
+        $validated = $request->validated();
     
+        try {
+            // Actualizar los campos que necesitas actualizar
+            $news->update([
+                'description' => $validated['description'],
+                'content' => $validated['content'],
+                'date_of_the_new_story' => $validated['date_of_the_new_story'],
+            ]);
+    
+            // Actualizar la imagen si se proporciona una nueva
             if ($request->hasFile('url') && $request->file('url')->isValid()) {
-                // Guardar la nueva imagen
+                // Eliminar la imagen anterior si existe
+                if ($news->url) {
+                    Storage::delete(str_replace('/storage', 'public', $news->url));
+                }
+                // Almacenar la nueva imagen
                 $imagePath = $request->file('url')->store('public/img');
                 $img = Storage::url($imagePath);
-                // Actualizar la URL de la imagen solo si se proporciona un nuevo archivo
-                $validatedData['url'] = $img;
-            } else {
-                // Si no se proporciona un nuevo archivo, mantener la URL existente
-                $validatedData['url'] = $news->url;
+                $news->update(['url' => $img]);
             }
     
-            // Actualizar la noticia con los datos validados
-            $news->update($validatedData);
-    
-            // Redirigir a la página de índice de noticias con un mensaje de éxito
-            return redirect()->route('news.index')->with('success', 'La noticia se ha actualizado correctamente.');
-        } catch (\Exception $e) {
-            // En caso de error, redirigir de nuevo al formulario de edición con el mensaje de error
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }    
-      
-    /**
-     * Desactiva una noticia.
-     *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function deactivate(News $news)
-    {
-        try {
-            $news->update(['state' => 0]);
-            return redirect()->route('news.index')->with('success', 'Noticia desactivada exitosamente.');
-        } catch (\Exception $e) {
-            return redirect()->route('news.index')->with('error', 'Ha ocurrido un error al desactivar la noticia.');
+            // Redirigir con un mensaje de éxito
+            return redirect()->route('news.show', $news->id)->with('success', 'Noticia actualizada exitosamente.');
+        } 
+        catch (\Exception $e) {
+            // En caso de error, redirigir con un mensaje de error
+            return redirect()->back()->withInput()->withErrors(['error' => 'Error al actualizar la noticia: ' . $e->getMessage()]);
         }
     }
+    public function deactivate(News $news) {
+        $news->update(['state' => 0]);
 
-    /**
-     * Activa una noticia.
-     *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function activate(News $news)
-    {
+        return redirect()->route('news.index')->with('success', 'Noticia desactivada exitosamente.');
+    }
+
+    public function activate(News $news) {
         try {
             $news->update(['state' => 1]);
             return redirect()->route('news.index')->with('success', 'Noticia activada exitosamente.');
@@ -155,4 +106,5 @@ class NewsController extends Controller
             return redirect()->route('news.index')->with('error', 'Ha ocurrido un error al activar la noticia.');
         }
     }
+    
 }
