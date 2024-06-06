@@ -27,7 +27,7 @@ class NewsRequest extends FormRequest
             'content' => 'required|string',
             'slug' => 'string',
             'date_of_the_new_story' => 'required|date',
-            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'url' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ];
     }
 

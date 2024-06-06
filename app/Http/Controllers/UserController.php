@@ -13,66 +13,78 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::paginate(5);
-        return view('dashboard.users.index', compact('users'));
+    public function index() {
+        try {
+            $users = User::paginate(5);
+            return view('dashboard.users.index', compact('users'));
+        } 
+        catch (\Exception $e) {
+            abort(500, 'Error interno del servidor.');
+        }
     }
 
-    public function create()
-    {
-        $roles = Role::all();
-        return view('dashboard.users.create', compact('roles'));
+    public function create() {
+        try {
+            $roles = Role::all();
+            return view('dashboard.users.create', compact('roles'));
+        } 
+        catch (\Exception $e) {
+            abort(500, 'Error interno del servidor.');
+        }
     }
 
-    public function store(UserRequest $request)
-    {
-        $validator = $request->validated();
+    public function store(UserRequest $request) {
+        try {
+            $validator = $request->validated();
 
-        if ($request->hasFile('url')) {
-            $imagePath = $request->file('url')->store('public/img');
-            $img = Storage::url($imagePath);
-        } else {
             $img = null;
-        }
-
-        $user = User::create([
-            'name' => $validator['name'],
-            'username' => $validator['username'],
-            'email' => $validator['email'],
-            'password' => bcrypt($validator['password']),
-            'url' => $img,
-            'note' => $validator['note'] ?? null,
-            'position' => $validator['position'] ?? null,
-            'role_id' => $request->input('role_id'), // Añadir role_id
-        ]);
-
-        if ($request->has('skills')) {
-            foreach ($request->input('skills') as $skill) {
-                $user->skills()->create(['skill' => $skill]);
+            if ($request->hasFile('url') && $request->file('url')->isValid()) {
+                $imagePath = $request->file('url')->store('public/img');
+                $img = Storage::url($imagePath);
             }
-        }
 
-        if ($request->has('experiences')) {
-            foreach ($request->input('experiences') as $experience) {
-                $user->experiences()->create(['experience' => $experience]);
+            $user = User::create([
+                'name' => $validator['name'],
+                'username' => $validator['username'],
+                'email' => $validator['email'],
+                'password' => bcrypt($validator['password']),
+                'url' => $img,
+                'note' => $validator['note'] ?? null,
+                'position' => $validator['position'] ?? null,
+                'role_id' => $request->input('role_id'),
+            ]);
+
+            if ($request->has('skills')) {
+                foreach ($request->input('skills') as $skill) {
+                    $user->skills()->create(['skill' => $skill]);
+                }
             }
-        }
 
-        if ($request->has('educations')) {
-            foreach ($request->input('educations') as $education) {
-                $user->educations()->create(['education' => $education]);
+            if ($request->has('experiences')) {
+                foreach ($request->input('experiences') as $experience) {
+                    $user->experiences()->create(['experience' => $experience]);
+                }
             }
-        }
 
-        if ($request->has('interests')) {
-            foreach ($request->input('interests') as $interest) {
-                $user->interests()->create(['interest' => $interest]);
+            if ($request->has('educations')) {
+                foreach ($request->input('educations') as $education) {
+                    $user->educations()->create(['education' => $education]);
+                }
             }
-        }
 
-        return redirect()->route('CardsProfes')->with('success', 'Usuario creado exitosamente');
-    }
+            if ($request->has('interests')) {
+                foreach ($request->input('interests') as $interest) {
+                    $user->interests()->create(['interest' => $interest]);
+                }
+            } 
+
+            $user->roles()->attach($request->input('roles'));
+
+            return redirect()->route('users.show', $user->id)->with('success', 'Usuario creado exitosamente.');
+        } 
+        catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
 
     public function show(User $user)
     {
