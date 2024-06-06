@@ -247,10 +247,18 @@
                                                         style="clip-path:path(&#x27;M500 250.002c0 138.065-111.931 249.996-250 249.996-138.071 0-250-111.931-250-249.996C0 111.93 111.929 0 250 0s250 111.93 250 250.002z&#x27;);">
                                                         <div id="Mj2nFnhydqw9lEND"
                                                             style="transform:scale(1, 1);transform-origin:250px 250px;">
-                                                            <img id="randomImage" alt="Imagen aleatoria" loading="lazy"
-                                                                style="transform:translate(-46.64146413px, -190.29904979px) rotate(0deg);display:block;object-fit:fill;width:637.05414845px;transform-origin:318.52707423px 477.79061134px;opacity:1.0;height:955.58122268px;">
+                                                            <!-- Aquí se mostrará la imagen de perfil del usuario -->
+                                                            @if (Auth::user()->url)
+                                                                <img src="{{ asset(Auth::user()->url) }}"
+                                                                    alt="Imagen de perfil" loading="lazy"
+                                                                    style="transform:translate(-46.64146413px, -190.29904979px) rotate(0deg);display:block;object-fit:fill;width:637.05414845px;transform-origin:318.52707423px 477.79061134px;opacity:1.0;height:955.58122268px;">
+                                                            @else
+                                                                <!-- Si el usuario no tiene imagen de perfil, aquí se mostrará una imagen aleatoria -->
+                                                                <img src="ruta_de_la_imagen_aleatoria"
+                                                                    alt="Imagen aleatoria" loading="lazy"
+                                                                    style="transform:translate(-46.64146413px, -190.29904979px) rotate(0deg);display:block;object-fit:fill;width:637.05414845px;transform-origin:318.52707423px 477.79061134px;opacity:1.0;height:955.58122268px;">
+                                                            @endif
                                                         </div>
-
                                                     </div>
                                                 </foreignobject>
                                             </g>
@@ -258,6 +266,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </section>
 
@@ -286,12 +295,7 @@
         </script>
 
 
-
-
-
-
         @include('layouts.footer')
-        <div class="menu-fader"></div>
-        <a id="scroll-top-btn" href="#" title="Volver arriba">&#8593;</a>
+
     </div>
 @endsection

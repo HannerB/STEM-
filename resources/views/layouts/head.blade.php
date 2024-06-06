@@ -1,6 +1,6 @@
 <meta charset="utf-8" />
 <title>{{ __('Emprende |') }}</title>
-<meta charset="UTF-8">        
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="format-detection" content="telephone=no">
 <meta name="facebook-domain-verification" content="6tbc6mpyed6iv9v740wox9eobzl1p6" />
@@ -191,12 +191,12 @@
 <link rel='stylesheet' id='jscrollpane-css'  href='{{ asset('css/jquery.jscrollpane.css') }}' type='text/css' media='all' />
 <link rel='stylesheet' id='slick-css'  href='{{ asset('css/slick.css') }}' type='text/css' media='all' />
 <link rel='stylesheet' id='social wall-css'  href='{{ asset('css/dcsns_wall.css') }}' type='text/css' media='all' />
-<link rel='stylesheet' id='styles-css'  href='https://www.barranquilla.gov.co/wp-content/themes/barranquilla/assets/css/styles.css' type='text/css' media='all' />
+<link rel='stylesheet' id='styles-css'  href='{{ asset('css/styles.css') }}' type='text/css' media='all' />
 <link rel='stylesheet' id='llos-css'  href='https://www.barranquilla.gov.co/wp-content/themes/barranquilla/style.css' type='text/css' media='all' />
 <link rel='stylesheet' id='moove_gdpr_frontend-css' href='{{ asset('css/gdpr-main.css?ver=4.12.8') }}' type='text/css' media='all' />
 
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" type="text/css" media='all' >       
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" type="text/css" media='all' >
 
 <style id='moove_gdpr_frontend-inline-css' type='text/css'>
     #moove_gdpr_cookie_modal,#moove_gdpr_cookie_info_bar,.gdpr_cookie_settings_shortcode_content{font-family:Nunito,sans-serif}
@@ -211,10 +211,10 @@
     #moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li.menu-item-selected a span.gdpr-icon,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li.menu-item-selected button span.gdpr-icon{color:inherit}
     #moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li a span.gdpr-icon,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li button span.gdpr-icon{color:inherit}
     #moove_gdpr_cookie_modal .gdpr-acc-link{line-height:0;font-size:0;color:transparent;position:absolute}
-    #moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-close:hover i,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li a,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li button,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content 
+    #moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-close:hover i,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li a,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li button,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content
     #moove-gdpr-menu li button i,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-modal-left-content #moove-gdpr-menu li a i,#moove_gdpr_cookie_modal .moove-gdpr-modal-content .moove-gdpr-tab-main .moove-gdpr-tab-main-content a:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a.mgbutton:hover,
     #moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.mgbutton:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button:hover,
-    #moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content span.change-settings-button:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.change-settings-button:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container 
+    #moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content span.change-settings-button:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.change-settings-button:hover,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container
     .moove-gdpr-info-bar-content u.change-settings-button:hover,#moove_gdpr_cookie_info_bar span[data-href]>u.change-settings-button,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a.mgbutton.focus-g,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.mgbutton.focus-g,
     #moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a.focus-g,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.focus-g,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a.mgbutton:focus,
     #moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button.mgbutton:focus,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content a:focus,#moove_gdpr_cookie_info_bar.moove-gdpr-dark-scheme .moove-gdpr-info-bar-container .moove-gdpr-info-bar-content button:focus,
@@ -224,12 +224,12 @@
 </style>
 
 <script type='text/javascript' src='{{ asset('js/responsive-voice-js.js') }}' id='responsive-voice-js'></script>
-<script type='text/javascript' src='{{ asset('js/jquery-core-js.js') }}' id='jquery-core-js'></script>      
-<script type='text/javascript' src='{{ asset('js/jquery-migrate-js.js') }}' id='jquery-migrate-js'></script>     
+<script type='text/javascript' src='{{ asset('js/jquery-core-js.js') }}' id='jquery-core-js'></script>
+<script type='text/javascript' src='{{ asset('js/jquery-migrate-js.js') }}' id='jquery-migrate-js'></script>
 
 <link rel="https://api.w.org/" href="https://www.barranquilla.gov.co/wp-json/" />
 <link rel="alternate" type="application/json" href="https://www.barranquilla.gov.co/wp-json/wp/v2/pages/21" />
-<link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" /> 
+<link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
 <link rel="apple-touch-icon" href="{{ asset('img/favicon-retina.png') }}">
 
 <script>
@@ -237,7 +237,7 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  
+
     ga('create', 'UA-126961684-1', 'auto');
     ga('send', 'pageview');
 </script>
@@ -245,7 +245,7 @@
 <style type="text/css" id="wp-custom-css">
     .cityLed .column-1{
         min-width: 100px;
-    }	
+    }
 </style>
 
 <style type="text/css" id="custom-css">
