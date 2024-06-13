@@ -37,7 +37,7 @@ ol,
 li {
     margin: 0;
     padding: 0;
-    font-synthesis: none;
+
     font-kerning: none;
     font-variant-ligatures: none;
     font-feature-settings: "kern" 0, "calt" 0, "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
@@ -57,7 +57,7 @@ a {
     color: inherit;
 }
 
-@font-face {
+/* @font-face {
     font-family: YAD1aU3sLnI-0;
     src: url(fonts/8f7934b3d45567e9cf1f541e008969a9.woff2);
     font-weight: 400;
@@ -811,7 +811,7 @@ a {
     src: url(fonts/1060345c54d396e76d73f1da7ee200bd.woff2);
     font-weight: 900;
     font-style: italic;
-}
+} */
 
 #verticalMenu {
     border: 12px solid #ffffff;
@@ -4080,3 +4080,5 @@ html {
         background-color: rgba(226, 226, 226, 0.05);
     }
 }
+
+
