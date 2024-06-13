@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\NewsImage;
 
 class News extends Model
 {
@@ -16,20 +15,23 @@ class News extends Model
         'content',
         'state',
         'slug',
+        'url',
         'date_of_the_new_story',
     ];
 
     /**
      * Activate the news.
      */
-    public function activate() {
+    public function activate()
+    {
         $this->update(['state' => 1]);
     }
 
     /**
      * Deactivate the news.
      */
-    public function deactivate() {
+    public function deactivate()
+    {
         $this->update(['state' => 0]);
     }
 
@@ -38,13 +40,9 @@ class News extends Model
      *
      * @return string
      */
-    public function formattedNewsDate() {
-    if ($this->date_of_the_new_story) {
+    public function formattedNewsDate()
+    {
+        // Assuming date_of_the_new_story is a date or datetime field
         return $this->date_of_the_new_story->format('Y-m-d');
-    }
-    return null;
-    }
-    public function images() {
-        return $this->hasOne(NewsImage::class)->where('is_main', true);
     }
 }

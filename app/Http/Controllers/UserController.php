@@ -10,29 +10,32 @@ use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-class UserController extends Controller {
-    public function index() {
+class UserController extends Controller
+{
+    public function index()
+    {
         try {
             $users = User::paginate(5);
             return view('dashboard.users.index', compact('users'));
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             abort(500, 'Error interno del servidor.');
         }
     }
 
-    public function create() {
+    public function create()
+    {
         try {
             $roles = Role::all();
             return view('dashboard.users.create', compact('roles'));
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             abort(500, 'Error interno del servidor.');
         }
     }
 
-    public function store(UserRequest $request) {
+    public function store(UserRequest $request)
+    {
         try {
             $validator = $request->validated();
 
@@ -51,6 +54,12 @@ class UserController extends Controller {
                 'note' => $validator['note'] ?? null,
                 'position' => $validator['position'] ?? null,
                 'role_id' => $request->input('role_id'),
+                'area' => $validator['area'] ?? null,
+                'phone_number' => $validator['phone_number'] ?? null,
+                'twitter_link' => $validator['twitter_link'] ?? null,
+                'facebook_link' => $validator['facebook_link'] ?? null,
+                'linkedin_link' => $validator['linkedin_link'] ?? null,
+                'college' => $validator['college'] ?? null,
             ]);
 
             if ($request->has('skills')) {
@@ -75,13 +84,12 @@ class UserController extends Controller {
                 foreach ($request->input('interests') as $interest) {
                     $user->interests()->create(['interest' => $interest]);
                 }
-            } 
+            }
 
             $user->roles()->attach($request->input('roles'));
 
             return redirect()->route('users.show', $user->id)->with('success', 'Usuario creado exitosamente.');
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
@@ -90,73 +98,98 @@ class UserController extends Controller {
     {
         $role = $user->role;
         $roleName = $role ? $role->name : 'N/A'; // Verificar si $role es nulo
-        return view('dashboard.users.show', compact('user', 'roleName'));
+
+        // Determinar la vista de destino según la ruta actual
+        $currentRoute = Route::currentRouteName();
+        if ($currentRoute === 'dashboard.users.show') {
+            // Redirigir a la vista del dashboard
+            return view('dashboard.users.show', compact('user', 'roleName'));
+        } else {
+            // Redirigir a la vista de entreProfes
+            return view('entreProfes.entreProfes', compact('user', 'roleName'));
+        }
     }
 
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         return view('dashboard.users.edit', compact('user'));
     }
 
-    public function update(UserUpdateRequest $request, $id) {
-        $validated = $request->validated();
+    public function update(UserUpdateRequest $request, $id)
+{
+    $validated = $request->validated();
 
-        $user = User::findOrFail($id);
+    $user = User::findOrFail($id);
 
+    $user->update([
+        'name' => $validated['name'],
+        'username' => $validated['username'],
+        'email' => $validated['email'],
+        'note' => $validated['note'] ?? null,
+        'position' => $validated['position'] ?? null,
+        'area' => $validated['area'] ?? null,
+        'phone_number' => $validated['phone_number'] ?? null,
+        'twitter_link' => $validated['twitter_link'] ?? null,
+        'facebook_link' => $validated['facebook_link'] ?? null,
+        'linkedin_link' => $validated['linkedin_link'] ?? null,
+        'college' => $validated['college'] ?? null,
+    ]);
+
+    if ($request->filled('password')) {
         $user->update([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'note' => $validated['note'] ?? null,
-            'position' => $validated['position'] ?? null,
+            'password' => bcrypt($validated['password']),
         ]);
-
-        if ($request->filled('password')) {
-            $user->update([
-                'password' => bcrypt($validated['password']),
-            ]);
-        }
-
-        if ($request->hasFile('url')) {
-            if ($user->url) {
-                Storage::delete(str_replace('/storage', 'public', $user->url));
-            }
-            $imagePath = $request->file('url')->store('public/img');
-            $img = Storage::url($imagePath);
-            $user->update(['url' => $img]);
-        }
-
-        $this->updateUserAttributes($user, $validated);
-
-        return redirect()->route('CardsProfes')->with('success', 'Perfil actualizado exitosamente');
     }
+
+    if ($request->hasFile('url')) {
+        if ($user->url) {
+            Storage::delete(str_replace('/storage', 'public', $user->url));
+        }
+        $imagePath = $request->file('url')->store('public/img');
+        $img = Storage::url($imagePath);
+        $user->update(['url' => $img]);
+    }
+
+    $this->updateUserAttributes($user, $validated);
+
+    return redirect()->route('users.show', $user->id)->with('success', 'Perfil actualizado exitosamente');
+}
 
     protected function updateUserAttributes(User $user, array $validated)
     {
         if (array_key_exists('skills', $validated)) {
             $user->skills()->delete();
             foreach ($validated['skills'] as $skill) {
-                $user->skills()->create(['skill' => $skill]);
+                if (!empty($skill)) {
+                    $user->skills()->create(['skill' => $skill]);
+                }
             }
         }
 
         if (array_key_exists('experiences', $validated)) {
             $user->experiences()->delete();
             foreach ($validated['experiences'] as $experience) {
-                $user->experiences()->create(['experience' => $experience]);
+                if (!empty($experience)) {
+                    $user->experiences()->create(['experience' => $experience]);
+                }
             }
         }
 
         if (array_key_exists('educations', $validated)) {
             $user->educations()->delete();
             foreach ($validated['educations'] as $education) {
-                $user->educations()->create(['education' => $education]);
+                if (!empty($education)) {
+                    $user->educations()->create(['education' => $education]);
+                }
             }
         }
 
         if (array_key_exists('interests', $validated)) {
             $user->interests()->delete();
             foreach ($validated['interests'] as $interest) {
-                $user->interests()->create(['interest' => $interest]);
+                if (!empty($interest)) {
+                    $user->interests()->create(['interest' => $interest]);
+                }
             }
         }
     }
@@ -205,11 +238,15 @@ class UserController extends Controller {
             }
         }
 
+        // Obtener todos los usuarios
         $users = User::all();
+
+        // Pasar los usuarios a la vista
         return view('entreProfes.EntreProfes', compact('users'));
     }
 
-    public function CardsProfes(Request $request, User $user)
+
+    public function CardsProfes(Request $request)
     {
         if ($request->isMethod('post')) {
             $credentials = $request->only('email', 'password');
@@ -221,6 +258,29 @@ class UserController extends Controller {
             }
         }
 
-        return view('entreprofes.cardsProfes', compact('user'));
+        $users = User::all();
+        return view('entreprofes.cardsProfes', compact('users'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos
+        $users = User::where('name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%')
+            ->get();
+
+        // Pasa los resultados de la búsqueda a la vista
+        return view('entreprofes.search', compact('users', 'query'));
+    }
+
+    public function viewProfile(User $user)
+    {
+        // Cargar las relaciones necesarias del usuario (skills, experiences, interests, etc.)
+        $user->load('skills', 'experiences', 'educations', 'interests');
+
+        return view('entreProfes.entreProfes', compact('user'));
+    }
+
 }

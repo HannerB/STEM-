@@ -35,6 +35,12 @@ class UserUpdateRequest extends FormRequest
             'url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'note' => 'nullable|string',
             'position' => 'nullable|string|max:255',
+            'area' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'twitter_link' => 'nullable|string|max:255',
+            'facebook_link' => 'nullable|string|max:255',
+            'linkedin_link' => 'nullable|string|max:255',
+            'college' => 'nullable|string|max:255',
             'skills.*' => 'nullable|string|max:255', // Regla para la matriz de habilidades
             'experiences.*' => 'nullable|string|max:255', // Regla para la matriz de experiencias
             'educations.*' => 'nullable|string|max:255', // Regla para la matriz de educaciones

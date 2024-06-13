@@ -25,8 +25,9 @@ class NewsRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'required|string',
             'content' => 'required|string',
+            'slug' => 'string',
             'date_of_the_new_story' => 'required|date',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            'url' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ];
     }
 
@@ -39,25 +40,17 @@ class NewsRequest extends FormRequest
     {
         return [
             'title.required' => 'El título es obligatorio.',
+            'title.string' => 'El título debe ser una cadena de texto.',
             'description.required' => 'La descripción es obligatoria.',
+            'description.string' => 'La descripción debe ser una cadena de texto.',
             'content.required' => 'El contenido es obligatorio.',
+            'content.string' => 'El contenido debe ser una cadena de texto.',
             'date_of_the_new_story.required' => 'La fecha de la noticia es obligatoria.',
             'date_of_the_new_story.date' => 'La fecha de la noticia debe ser una fecha válida.',
-            'images.*.image' => 'Cada archivo debe ser una imagen.',
-            'images.*.mimes' => 'Cada archivo debe ser de tipo: jpeg, png, jpg o gif.',
-            'images.*.max' => 'El tamaño máximo de cada archivo es de 5048 KB.',
+            'url.required' => 'El archivo de imagen es obligatorio.',
+            'url.image' => 'El archivo debe ser una imagen.',
+            'url.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg o gif.',
+            'url.max' => 'El tamaño máximo del archivo es de 2048 KB.',
         ];
-    }
-    /**
-     * Configure the validator instance.
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $input = $this->all();
-            if (empty($input['title']) && empty($input['description']) && empty($input['content']) && empty($input['date_of_the_new_story']) && !$this->hasFile('url')) {
-                $validator->errors()->add('fields', 'Por favor, llenar todos los campos obligatorios.');
-            }
-        });
     }
 }
