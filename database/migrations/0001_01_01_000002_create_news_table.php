@@ -16,20 +16,12 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->longText('content');
+            $table->string('url')->nullable();
             $table->boolean('state')->default(1);
-            $table->string('slug')->unique()->nullable()->default('');
+            $table->string('slug')->unique()->nullable()->default('');;
             $table->dateTime('date_of_the_new_story');
             $table->timestamps();
         });
-
-        Schema::create('news_images', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('news_id')->constrained()->onDelete('cascade');
-            $table->string('url');
-            $table->boolean('is_main')->default(false); 
-            $table->timestamps();
-        });
-        
     }
 
     /**
@@ -37,7 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_images');
         Schema::dropIfExists('news');
     }
 };

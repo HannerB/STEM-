@@ -21,8 +21,14 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->string('password');
-            $table->text('note')->nullable();
+            $table->text('note')->nullable(); // Campo de nota
             $table->string('position', 255)->nullable();
+            $table->string('area')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('twitter_link')->nullable();
+            $table->string('facebook_link')->nullable();
+            $table->string('linkedin_link')->nullable();
+            $table->string('college')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -51,5 +57,15 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['role_id']);
+            $table->dropColumn('role_id');
+            $table->dropColumn('area');
+            $table->dropColumn('phone_number');
+            $table->dropColumn('twitter_link');
+            $table->dropColumn('facebook_link');
+            $table->dropColumn('linkedin_link');
+            $table->dropColumn('college');
+        });
     }
 };
