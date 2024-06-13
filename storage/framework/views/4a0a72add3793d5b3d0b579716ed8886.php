@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-info">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-            <a class="navbar-translate" href="<?php echo e(route('users.index')); ?>"><?php echo e($titlePage); ?></a>
+
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>

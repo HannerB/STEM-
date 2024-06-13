@@ -98,40 +98,28 @@
                     <div class="card-footer text-right">
                         <ul class="pagination">
                             
-                            <?php if($users->hasPages()): ?>
+                            <li class="page-item <?php echo e($users->onFirstPage() ? 'disabled' : ''); ?>">
+                                <a class="page-link" href="<?php echo e($users->previousPageUrl()); ?>" aria-label="Previous">
+                                    &laquo;
+                                </a>
+                            </li>
+
+                            
+                            <?php for($i = 1; $i <= $users->lastPage(); $i++): ?>
+                                <li class="page-item <?php echo e($i == $users->currentPage() ? 'active' : ''); ?>">
+                                    <a class="page-link" href="<?php echo e($users->url($i)); ?>"><?php echo e($i); ?></a>
+                                </li>
+                                <?php endfor; ?>
+
                                 
-                                <?php if(!$users->onFirstPage()): ?>
-                                    <li class="page-item">
-                                        <a class="page-link" href="<?php echo e($users->previousPageUrl()); ?>" tabindex="-1" aria-disabled="true">&laquo;</a>
-                                    </li>
-                                <?php endif; ?>
-                    
-                                
-                                <?php $__currentLoopData = $users->getUrlRange(1, $users->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($page == 1 || $page == $users->lastPage() || ($page >= max(1, $users->currentPage() - 1) && $page <= min($users->lastPage(), $users->currentPage() + 1))): ?>
-                                        <li class="page-item <?php echo e($page == $users->currentPage() ? 'active' : ''); ?>">
-                                            <a class="page-link" href="<?php echo e($url); ?>"><?php echo e($page); ?></a>
-                                        </li>
-                                    <?php elseif($page == 2 && $users->currentPage() > 3): ?>
-                                        <li class="page-item disabled">
-                                            <span class="page-link">&hellip;</span>
-                                        </li>
-                                    <?php elseif($page == $users->lastPage() - 1 && $users->currentPage() < $users->lastPage() - 2): ?>
-                                        <li class="page-item disabled">
-                                            <span class="page-link">&hellip;</span>
-                                        </li>
-                                    <?php endif; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    
-                                
-                                <?php if($users->hasMorePages()): ?>
-                                    <li class="page-item">
-                                        <a class="page-link" href="<?php echo e($users->nextPageUrl()); ?>">&raquo;</a>
-                                    </li>
-                                <?php endif; ?>
-                            <?php endif; ?>
+                                <li
+                                    class="page-item <?php echo e($users->currentPage() == $users->lastPage() ? 'disabled' : ''); ?>">
+                                    <a class="page-link" href="<?php echo e($users->nextPageUrl()); ?>" aria-label="Next">
+                                        &raquo;
+                                    </a>
+                                </li>
                         </ul>
-                    </div>                                                                                                                     
+                    </div>
                 </div>
             </div>
         </div>

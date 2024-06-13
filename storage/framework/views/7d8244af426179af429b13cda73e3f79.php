@@ -8,54 +8,65 @@
                     <div class="card">
                         <div class="card-header card-header-info">
                             <h4 class="card-title">Noticia</h4>
-                            <p class="card-category">Ingrese los datos de la nueva noticia</p>
+                            <p class="card-category">Ingresar datos</p>
                         </div>
                         <div class="card-body">
-                            <?php if($errors->any()): ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <p><?php echo e($error); ?></p>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </div>
-                            <?php endif; ?>
-                            <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Título</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="title" id="title" placeholder="Ingrese el Título" value="<?php echo e(old('title')); ?>" autofocus required>
+                            <!-- Campos del formulario aquí -->
+                            <div class="row">
+                                <label for="title" class="col-sm-2 col-form-label">Titulo</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Ingrese el Título" value="<?php echo e(old('title')); ?>" autofocus>
+                                    <?php if($errors->has('title')): ?>
+                                    <span class="invalid-feedback" role="alert"><?php echo e($errors->first('title')); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="description" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="description" id="description" placeholder="Ingrese la Descripción" required><?php echo e(old('description')); ?></textarea>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control form-group" name="description" id="description" placeholder="Ingrese la Descripción"><?php echo e(old('description')); ?></textarea>
+                                    <?php if($errors->has('description')): ?>
+                                    <span class="invalid-feedback" role="alert"><?php echo e($errors->first('description')); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="content" class="col-sm-2 col-form-label">Contenido</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="content" id="content" placeholder="Ingrese el Contenido" required><?php echo e(old('content')); ?></textarea>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control form-group" name="content" id="content" placeholder="Ingrese el Contenido"><?php echo e(old('content')); ?></textarea>
+                                    <?php if($errors->has('content')): ?>
+                                    <span class="invalid-feedback" role="alert"><?php echo e($errors->first('content')); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="images" class="col-sm-2 col-form-label">Imágenes</label>
-                                <div class="col-sm-10">
-                                    <div id="dropzoneNews" class="dropzone">
-                                        <div class="fallback">
-                                            <input type="file" name="images[]" multiple>
-                                        </div>
-                                    </div>
-                                    <span class="text-danger" id="images-error"></span>
+                            <div class="row">
+                                <label for="url" class="col-sm-2 col-form-label">Imagen</label>
+                                <div class="col-sm-7">
+                                    <div id="dropzoneNews" class="dropzone form-group"></div>
+                                    <?php $__errorArgs = ['url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="error text-danger" id="error-url"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="date_of_the_new_story" class="col-sm-2 col-form-label">Fecha de la noticia</label>
-                                <div class="col-sm-10">
-                                    <input type="datetime-local" class="form-control" name="date_of_the_new_story" id="date_of_the_new_story" value="<?php echo e(old('date_of_the_new_story')); ?>" required>
+                                <div class="col-sm-7">
+                                    <input type="datetime-local" class="form-control" name="date_of_the_new_story" id="date_of_the_new_story" placeholder="Ingrese la Fecha de la Noticia" value="<?php echo e(old('date_of_the_new_story')); ?>">
+                                    <?php if($errors->has('date_of_the_new_story')): ?>
+                                    <span class="invalid-feedback" role="alert"><?php echo e($errors->first('date_of_the_new_story')); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ml-auto mr-auto">
-                            <button type="button" class="btn btn-info" id="submitForm">Crear</button>
+                            <button type="submit" class="btn btn-info">Guardar</button>
                             <a href="<?php echo e(route('news.index')); ?>" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
@@ -67,65 +78,73 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>
-<script>
-    Dropzone.autoDiscover = false;
+    <script>
+        Dropzone.autoDiscover = false;
 
-    $(document).ready(function() {
-        if (!Dropzone.instances.length) { // Comprobación para asegurar que no haya instancias previas
+        if (!document.getElementById("dropzoneNews").classList.contains("dz-clickable")) {
             var dropzoneNews = new Dropzone("#dropzoneNews", {
                 url: "<?php echo e(route('news.store')); ?>",
-                paramName: "images",
-                maxFilesize: 5, // Tamaño máximo de archivo en MB
-                acceptedFiles: 'image/*', // Tipos de archivo permitidos
-                autoProcessQueue: false, // No procesar archivos automáticamente
-                parallelUploads: 10, // Número de archivos a subir simultáneamente
+                paramName: "url",
+                maxFilesize: 5, // Tamaño máximo en MB
+                acceptedFiles: 'image/*',
+                dictDefaultMessage: "Haz clic o arrastra y suelta los archivos aquí para subirlos",
+                dictFallbackText: "Por favor utiliza el formulario de reserva para subir tus archivos como en los viejos tiempos.",
+                dictInvalidFileType: "No puedes subir archivos de este tipo.",
+                dictCancelUpload: "Cancelar subida",
+                dictCancelUploadConfirmation: "¿Estás seguro de que deseas cancelar esta subida?",
+                dictRemoveFile: "Eliminar archivo",
+                dictMaxFilesExceeded: "No puedes subir más archivos.",
                 headers: {
                     'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
                 },
+                autoProcessQueue: false,
+                addRemoveLinks: true,
                 init: function() {
-                    var submitButton = document.querySelector("#submitForm");
-                    var myDropzone = this; // Closure
+                    var myDropzone = this;
 
-                    submitButton.addEventListener("click", function(e) {
+                    document.querySelector("#newsForm button[type=submit]").addEventListener("click", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
 
-                        if (myDropzone.getQueuedFiles().length > 0) {
-                            myDropzone.processQueue(); // Subir archivos
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("title", document.getElementById("title").value);
+                        formData.append("description", document.getElementById("description").value);
+                        formData.append("content", document.getElementById("content").value);
+                        formData.append("date_of_the_new_story", document.getElementById("date_of_the_new_story").value);
+                    });
+
+                    this.on("success", function(file, response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Noticia creada exitosamente.',
+                                showConfirmButton: false,
+                                timer: 1500 // Duración del mensaje en milisegundos
+                            }).then(() => {
+                                window.location.href = "<?php echo e(route('news.show', ':id')); ?>".replace(':id', response.id);
+                            });
                         } else {
-                            // No hay archivos en la cola, enviar formulario manualmente
-                            document.querySelector("#newsForm").submit();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al subir la imagen',
+                                showConfirmButton: false,
+                                timer: 1500 // Duración del mensaje en milisegundos
+                            });
                         }
                     });
-
-                    this.on("sendingmultiple", function(file, xhr, formData) {
-                        // Añadir todos los campos del formulario a la solicitud
-                        $("#newsForm").serializeArray().forEach(function(field) {
-                            formData.append(field.name, field.value);
-                        });
-                    });
-
-                    this.on("successmultiple", function(files, response) {
-                        // Manejo de la respuesta exitosa
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Noticia creada exitosamente.',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(() => {
-                            window.location.href = "<?php echo e(route('news.index')); ?>";
-                        });
-                    });
-
-                    this.on("errormultiple", function(files, response) {
-                        // Manejo de errores
-                        $('#images-error').text(response.message || 'Error al subir las imágenes.');
+                    
+                    this.on("error", function(file, response) {
+                        if (typeof response.message !== "undefined") {
+                            alert(response.message);
+                        } else {
+                            alert("Error al subir la imagen");
+                        }
                     });
                 }
             });
         }
-    });
-</script>
+    </script>
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('dashboard', ['activePage' => 'news', 'titlePage' => 'Crear Noticia'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/STEM--main/resources/views/dashboard/news/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('dashboard', ['activePage' => 'news', 'titlePage' => 'Nueva Noticia'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/STEM--main/resources/views/dashboard/news/create.blade.php ENDPATH**/ ?>

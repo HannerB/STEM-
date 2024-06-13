@@ -2,7 +2,7 @@
     <div class="container">
         <div class="logo-block">
             <strong class="logo">
-                <a href="<?php echo e(route('home')); ?>">
+                <a href="https://www.barranquilla.gov.co/">
                     Alcaldía de Barranquilla, Distrito Especial, Industrial y Portuario
                 </a>
             </strong>

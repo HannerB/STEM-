@@ -24,9 +24,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo e(route('loginProfes')); ?>">
-                        EntreProfes
-                    </a>
+                    <?php if(Auth::check()): ?>
+                        <a href="<?php echo e(route('CardsProfes')); ?>">
+                            EntreProfes
+                        </a>
+                    <?php else: ?>
+                        <a href="<?php echo e(route('loginProfes')); ?>">
+                            EntreProfes
+                        </a>
+                    <?php endif; ?>
                 </li>
                 <li>
                     <a href="">
