@@ -4,15 +4,17 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ __('dashboard') }}</title>
 <link rel="icon" href="{{ asset('img/favicon-retina.png') }}" type="image/png">
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/dropzone.css') }}">
 
-<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-dashboard.css?v=2.1.1') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-kit.min.css?v=2.0.7') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-dashboard.css?v=2.1.1') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/material-kit.min.css?v=2.0.7') }}" />
 
 <style>
     .dropzone {
@@ -29,6 +31,6 @@
         box-shadow: 0px 2px 20px 0px #f2f2f2;
         border-radius: 10px;
     }
-    
 </style>
+
 @yield('css')

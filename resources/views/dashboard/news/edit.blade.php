@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ route('news.update', $news) }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="updateForm">
+                    <form action="{{ route('news.update', $news->id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="newsForm">
                         @csrf
                         @method('PUT')
                         <div class="card">
@@ -15,53 +15,52 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <label for="title" class="col-sm-2 col-form-label">Título</label>
+                                    <label for="title" class="col-sm-2 col-form-label">Titulo</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="title" name="title"
-                                            value="{{ old('title', $news->title) }}" autofocus>
-                                        @if ($errors->has('title'))
-                                            <span class="error text-danger">{{ $errors->first('title') }}</span>
-                                        @endif
+                                        <input type="text" class="form-control" name="title" id="title" placeholder="Ingrese el Título" value="{{ old('title', $news->title) }}" autofocus>
+                                        @error('title')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="description" class="col-sm-2 col-form-label">Descripción</label>
                                     <div class="col-sm-7">
-                                        <textarea type="text" class="form-control form-group" id="description" name="description">{{ old('description', $news->description) }}</textarea>
-                                        @if ($errors->has('description'))
-                                            <span class="error text-danger">{{ $errors->first('description') }}</span>
-                                        @endif
+                                        <textarea class="form-control form-group" name="description" id="description" placeholder="Ingrese la Descripción">{{ old('description', $news->description) }}</textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="content" class="col-sm-2 col-form-label">Contenido</label>
                                     <div class="col-sm-7">
-                                        <textarea type="text" class="form-control form-group" id="content" name="content">{{ old('content', $news->content) }}</textarea>
-                                        @if ($errors->has('content'))
-                                            <span class="error text-danger"
-                                                for="input-content">{{ $errors->first('content') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="url" class="col-sm-2 col-form-label">Nueva Imagen</label>
-                                    <div class="col-sm-7">
-                                        <div id="dropzoneEditNews" class="dropzone form-group"></div>
-                                        @error('url')
-                                            <span class="error text-danger">{{ $message }}</span>
+                                        <textarea class="form-control form-group" name="content" id="content" placeholder="Ingrese el Contenido">{{ old('content', $news->content) }}</textarea>
+                                        @error('content')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="date_of_the_new_story" class="col-sm-2 col-form-label">Fecha de la
-                                        noticia</label>
+                                    <label for="url" class="col-sm-2 col-form-label">Imagen</label>
                                     <div class="col-sm-7">
-                                        <input type="datetime-local" class="form-control form-group" id="date_of_the_new_story" name="date_of_the_new_story"
-                                            value="{{ old('date_of_the_new_story', $news->date_of_the_new_story) }}">
-                                        @if ($errors->has('date_of_the_new_story'))
-                                            <span
-                                                class="error text-danger">{{ $errors->first('date_of_the_new_story') }}</span>
-                                        @endif
+                                        <div id="dropzoneNews" class="dropzone form-group">
+                                            @if ($news->url)
+                                                <div class="form-group mt-3"></div>
+                                            @endif
+                                        </div>
+                                        @error('url')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="date_of_the_new_story" class="col-sm-2 col-form-label">Fecha de la noticia</label>
+                                    <div class="col-sm-7">
+                                        <input type="datetime-local" class="form-control" name="date_of_the_new_story" id="date_of_the_new_story" placeholder="Ingrese la Fecha de la Noticia" value="{{ old('date_of_the_new_story', date('Y-m-d\TH:i', strtotime($news->date_of_the_new_story))) }}">
+                                        @error('date_of_the_new_story')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -79,85 +78,60 @@
 
 @section('js')
     <script>
-        @if(isset($news))
-            var news = <?php echo json_encode($news); ?>;
-        @endif
-
         Dropzone.autoDiscover = false;
 
-        // Verificar si Dropzone está adjunto antes de inicializarlo
-        if (!document.getElementById("dropzoneEditNews").classList.contains("dz-clickable")) {
-            var dropzoneEditNews = new Dropzone("#dropzoneEditNews", {
-                url: "{{ route('news.update', isset($news) ? $news->id : '') }}",
-                method: "PUT",
-                paramName: "url",
-                maxFilesize: 5, // Tamaño máximo en MB
-                acceptedFiles: 'image/*',
-                dictDefaultMessage: "Haz clic o arrastra y suelta los archivos aquí para subirlos",
-                dictFallbackText: "Por favor utiliza el formulario de reserva para subir tus archivos como en los viejos tiempos.",
-                dictInvalidFileType: "No puedes subir archivos de este tipo.",
-                dictCancelUpload: "Cancelar subida",
-                dictCancelUploadConfirmation: "¿Estás seguro de que deseas cancelar esta subida?",
-                dictRemoveFile: "Eliminar archivo",
-                dictMaxFilesExceeded: "No puedes subir más archivos.",
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                autoProcessQueue: false,
-                addRemoveLinks: true,
-                init: function() {
-                    var myDropzone = this;
+        $(document).ready(function() {
+            // Verifica si el dropzone ya está inicializado para evitar duplicaciones
+            if (!document.getElementById("dropzoneNews").classList.contains("dz-clickable")) {
+                var dropzoneNews = new Dropzone("#dropzoneNews", {
+                    url: "{{ route('news.update', $news->id) }}",
+                    paramName: "images",
+                    maxFilesize: 5, // Tamaño máximo en MB
+                    acceptedFiles: 'image/*',
+                    dictDefaultMessage: "Arrastra y suelta los archivos aquí o haz clic para subir.",
+                    dictFallbackMessage: "Tu navegador no soporta arrastrar y soltar archivos para subir.",
+                    dictInvalidFileType: "No puedes subir archivos de este tipo.",
+                    dictCancelUpload: "Cancelar subida",
+                    dictRemoveFile: "Eliminar archivo",
+                    dictMaxFilesExceeded: "No puedes subir más archivos.",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    init: function() {
+                        this.on("error", function(file, message) {
+                            $('#images-error').text(message);
+                            this.removeFile(file);
+                        });
 
-                    document.querySelector("#updateForm button[type=submit]").addEventListener("click", function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        dropzoneEditNews.processQueue();
-                    });
+                        this.on("success", function(file, response) {
+                            console.log(response);
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Noticia creada exitosamente.',
+                                    showConfirmButton: false,
+                                    timer: 1500 // Duración del mensaje en milisegundos
+                                }).then(() => {
+                                    window.location.href = "{{ route('news.show', ':id') }}".replace(':id', response.id);
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error al subir la imagen',
+                                    text: response.message, // Mostrar el mensaje de error específico
+                                    showConfirmButton: true,
+                                });
+                            }
+                        });
+                    }
+                });
 
-                    this.on("sending", function(file, xhr, formData) {
-                        formData.append("title", document.getElementById("title").value);
-                        formData.append("description", document.getElementById("description").value);
-                        formData.append("content", document.getElementById("content").value);
-                        formData.append("date_of_the_new_story", document.getElementById("date_of_the_new_story").value);
-                    });
-
-                    this.on("success", function(file, response) {
-                        if (response.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Noticia actualizada exitosamente.',
-                                showConfirmButton: false,
-                                timer: 1500 // Duración del mensaje en milisegundos
-                            }).then(() => {
-                                window.location.href = "{{ route('news.show', isset($news) ? $news->id : '') }}";
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error al subir la imagen',
-                                showConfirmButton: false,
-                                timer: 1500 // Duración del mensaje en milisegundos
-                            });
-                        }
-                    });
-                    
-                    this.on("error", function(file, response) {
-                        if (typeof response.message !== "undefined") {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: response.message
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Error al subir la imagen'
-                            });
-                        }
-                    });
-                }
-            });
-        }
+                // Evitar múltiples envíos del formulario por Dropzone
+                $('#newsForm').submit(function(e) {
+                    e.preventDefault();
+                    dropzoneNews.processQueue();
+                });
+            }
+        });
     </script>
 @endsection

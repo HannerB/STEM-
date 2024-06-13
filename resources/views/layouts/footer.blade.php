@@ -13,7 +13,7 @@
                     <br/>
 
                     <ul id="menu-footer" class="footer-list">
-
+                        
                         <li id="menu-item-355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-355">
                             <a href="https://www.barranquilla.gov.co/condiciones-de-uso">
                                 Condiciones de uso
@@ -67,7 +67,7 @@
                         <p>
                             <a href="https://www.barranquilla.gov.co/alba/linea-unica-195">
                                 <strong>
-                                    Línea de atención:
+                                    Línea de atención: 
                                 </strong>
                             </a>
                             <strong>
@@ -80,7 +80,7 @@
                         <p>
                             <a href="https://www.barranquilla.gov.co/alba/linea-unica-195">
                                 <strong>
-                                    Línea anticorrupción:
+                                    Línea anticorrupción: 
                                 </strong>
                             </a>
                             <strong>
@@ -106,8 +106,8 @@
                         </p>
 
                         <p>
-                            <strong>Código DANE:</strong>
-                            08001&#8211;
+                            <strong>Código DANE:</strong> 
+                            08001&#8211; 
                             <strong>NIT</strong>
                             Alcaldía de Barranquilla, Distrito Especial, Industrial y Portuario: 8901020181
                         </p>
@@ -145,7 +145,7 @@
                     </ul>
 
                     <!--strong class="footer-logo col-sm-12">
-                        <a id="icons-govco-3 col-sm-12">
+                        <a id="icons-govco-3 col-sm-12"> 
                             <img src="https://www.barranquilla.gov.co/assets/logo_govco_blanco.svg" class="img-fluid footer-icon-govco-3" alt="Logo Gobierno de Colombia">
                             <img src="https://www.barranquilla.gov.co/assets/logo_co.svg" class="img-fluid footer-icon-co-3" alt="Logo Marca País Colombia">
                         </div-->
@@ -158,7 +158,7 @@
         <div class="container">
 
             <ul class="footer-links">
-
+                
                 <li>
                     <a href="https://www.colombia.co/" target="_blank" title='Ir al portal Colombia'>
                         <img src="{{ asset('img/logo_co.svg') }}" alt="Marca Colombia" width="60px" class="img-fluid">
@@ -166,7 +166,7 @@
                 </li>
 
                 <li class="border-left border-white" style></li>
-
+                
                 <li class="align-self-center">
                     <a href="https://www.gov.co/home/" target="_blank" title='Ir al portal GOV.CO'>
                         <img src="{{ asset('img/logo_govco_blanco(1).svg') }}" alt="Logo Gobierno de Colombia" width="130px" class="img-fluid">

@@ -36,7 +36,13 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->title }}</td>
-                                            <td><img src="{{ asset($item->url) }}" alt="{{ $item->slug }}" style="max-width: 100px;"></td>
+                                            <td>
+                                                @if ($item->images)
+                                                    <img src="{{ asset($item->images->url) }}" alt="{{ $item->slug }}" style="max-width: 100px;">
+                                                @else
+                                                    <span>No hay imagen principal</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $item->date_of_the_new_story }}</td>
                                             <td>
                                                 <span class="badge {{ $item->state == 1 ? 'badge-success' : 'badge-danger' }}">
@@ -69,28 +75,41 @@
                         </div>
                         <div class="card-footer text-right">
                             <ul class="pagination">
-                                {{-- Previous Page Link --}}
-                                <li class="page-item {{ $news->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $news->previousPageUrl() }}" aria-label="Previous">
-                                        &laquo;
-                                    </a>
-                                </li>
+                                {{-- Verifica si hay páginas disponibles --}}
+                                @if ($news->hasPages())
+                                    {{-- Enlace a la página anterior --}}
+                                    @if (!$news->onFirstPage())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $news->previousPageUrl() }}" tabindex="-1" aria-disabled="true">&laquo;</a>
+                                        </li>
+                                    @endif
                         
-                                {{-- Pagination Elements --}}
-                                @for ($i = 1; $i <= $news->lastPage(); $i++)
-                                    <li class="page-item {{ $i == $news->currentPage() ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $news->url($i) }}">{{ $i }}</a>
-                                    </li>
-                                @endfor
+                                    {{-- Mostrar los números de página --}}
+                                    @foreach ($news->getUrlRange(1, $news->lastPage()) as $page => $url)
+                                        @if ($page == 1 || $page == $news->lastPage() || ($page >= max(1, $news->currentPage() - 1) && $page <= min($news->lastPage(), $news->currentPage() + 1)))
+                                            <li class="page-item {{ $page == $news->currentPage() ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                        @elseif ($page == 2 && $news->currentPage() > 3)
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&hellip;</span>
+                                            </li>
+                                        @elseif ($page == $news->lastPage() - 1 && $news->currentPage() < $news->lastPage() - 2)
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&hellip;</span>
+                                            </li>
+                                        @endif
+                                    @endforeach
                         
-                                {{-- Next Page Link --}}
-                                <li class="page-item {{ $news->currentPage() == $news->lastPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $news->nextPageUrl() }}" aria-label="Next">
-                                        &raquo;
-                                    </a>
-                                </li>
+                                    {{-- Enlace a la página siguiente --}}
+                                    @if ($news->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $news->nextPageUrl() }}">&raquo;</a>
+                                        </li>
+                                    @endif
+                                @endif
                             </ul>
-                        </div>
+                        </div>                                                                                                                                                                                                                                                                                         
                     </div>
                 </div>
             </div>

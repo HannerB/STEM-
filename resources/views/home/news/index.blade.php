@@ -11,7 +11,7 @@
                 </h2>
             </div>
             <div class="col-sm-3">
-                <a href="{{ route('home.news') }}" class="link-more">
+                <a href="{{ route('home.news', ['page' => 1]) }}" class="link-more">
                     Noticias
                 </a>
             </div>
@@ -36,7 +36,7 @@
             <figure class="info-item">
                 <div class="img">
                     <a href="{{ route('home.show', ['slug' => Str::slug($item->slug)]) }}">
-                        <img src="{{ asset($item->url) }}"  class="img-responsive attachment-medium size-medium wp-post-image" alt="{{ $item->slug }}" loading="lazy" srcset="{{ asset($item->url) }} 768w, {{ asset($item->url) }} 1920w" sizes="(max-width: 768px) 100vw, 768px" />
+                        <img src="{{ asset($item->images->url) }}"  class="img-responsive attachment-medium size-medium wp-post-image" alt="{{ $item->slug }}" loading="lazy" srcset="{{ asset($item->images->url) }} 768w, {{ asset($item->images->url) }} 1920w" sizes="(max-width: 768px) 100vw, 768px" />                      
                     </a>
                 </div>
                 <figcaption>
