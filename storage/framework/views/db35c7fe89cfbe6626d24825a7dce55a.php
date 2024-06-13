@@ -11,7 +11,7 @@
                 </h2>
             </div>
             <div class="col-sm-3">
-                <a href="<?php echo e(route('home.news')); ?>" class="link-more">
+                <a href="<?php echo e(route('home.news', ['page' => 1])); ?>" class="link-more">
                     Noticias
                 </a>
             </div>
@@ -36,7 +36,7 @@
             <figure class="info-item">
                 <div class="img">
                     <a href="<?php echo e(route('home.show', ['slug' => Str::slug($item->slug)])); ?>">
-                        <img src="<?php echo e(asset($item->url)); ?>"  class="img-responsive attachment-medium size-medium wp-post-image" alt="<?php echo e($item->slug); ?>" loading="lazy" srcset="<?php echo e(asset($item->url)); ?> 768w, <?php echo e(asset($item->url)); ?> 1920w" sizes="(max-width: 768px) 100vw, 768px" />
+                        <img src="<?php echo e(asset($item->images->url)); ?>"  class="img-responsive attachment-medium size-medium wp-post-image" alt="<?php echo e($item->slug); ?>" loading="lazy" srcset="<?php echo e(asset($item->images->url)); ?> 768w, <?php echo e(asset($item->images->url)); ?> 1920w" sizes="(max-width: 768px) 100vw, 768px" />                      
                     </a>
                 </div>
                 <figcaption>

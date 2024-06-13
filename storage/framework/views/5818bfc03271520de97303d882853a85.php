@@ -23,7 +23,7 @@
                                 <li>
                                     <figure class="img">
                                         <a class="" href="<?php echo e(route('home.show', ['slug' => Str::slug($item->slug)])); ?>">
-                                            <img src="<?php echo e(asset($item->url)); ?>" class="img-responsive attachment-medium size-medium wp-post-image" alt="<?php echo e($item->slug); ?>" srcset="<?php echo e(asset($item->url)); ?> 768w, <?php echo e(asset($item->url)); ?> 1920w, <?php echo e(asset($item->url)); ?> 1536w, <?php echo e(asset($item->url)); ?> 2048w" sizes="(max-width: 768px) 100vw, 768px" />
+                                            <img src="<?php echo e(asset($item->images->url)); ?>" class="img-responsive attachment-medium size-medium wp-post-image" alt="<?php echo e($item->slug); ?>" srcset="<?php echo e(asset($item->images->url)); ?> 768w, <?php echo e(asset($item->images->url)); ?> 1920w, <?php echo e(asset($item->images->url)); ?> 1536w, <?php echo e(asset($item->images->url)); ?> 2048w" sizes="(max-width: 768px) 100vw, 768px" />
                                         </a>
                                     </figure>
                                     <time datetime="<?php echo e($item->date_of_the_new_story); ?>">
@@ -43,31 +43,69 @@
                                 </li>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
-                        </div>
+                        </div><?php if($news->lastPage() > 1): ?>
+                        <?php
+                            $visiblePages = 10; // Define el número deseado de páginas visibles en el rango medio
+                            $halfVisible = floor($visiblePages / 2); // Calcula la mitad del número de páginas visibles
+                            $startPage = max(1, $news->currentPage() - $halfVisible); // Calcula la página inicial del rango medio
+                            $endPage = min($news->lastPage(), $startPage + $visiblePages - 1); // Calcula la página final del rango medio
+                            
+                            // Ajusta el rango si el número total de páginas es menor que el número deseado
+                            if ($news->lastPage() < $visiblePages) {
+                                $startPage = 1;
+                                $endPage = $news->lastPage();
+                            } else {
+                                // Si la página actual está cerca del principio, ajusta el inicio del rango
+                                if ($news->currentPage() <= $halfVisible + 1) {
+                                    $startPage = 1;
+                                    $endPage = min($visiblePages, $news->lastPage());
+                                }
+                                // Si la página actual está cerca del final, ajusta el final del rango
+                                elseif ($news->currentPage() >= $news->lastPage() - $halfVisible) {
+                                    $startPage = max(1, $news->lastPage() - $visiblePages + 1);
+                                    $endPage = $news->lastPage();
+                                }
+                            }
+                            
+                            $ellipsisStart = $startPage > 1;
+                            $ellipsisEnd = $endPage < $news->lastPage();
+                        ?>
+                    
                         <nav class="pagination-wrap">
                             <ul class="pagination">
                                 
-                                <li class="page-item <?php echo e($news->onFirstPage() ? 'disabled' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($news->previousPageUrl()); ?>" aria-label="Previous">
-                                        &laquo;
-                                    </a>
-                                </li>
-                        
+                                <?php if($news->currentPage() > 1): ?>
+                                    <li class="prev"><a href="<?php echo e($news->previousPageUrl()); ?>"><span>&laquo;</span></a></li>
+                                <?php endif; ?>
                                 
-                                <?php for($i = 1; $i <= $news->lastPage(); $i++): ?>
-                                    <li class="page-item <?php echo e($i == $news->currentPage() ? 'active' : ''); ?>">
-                                        <a class="page-link" href="<?php echo e($news->url($i)); ?>"><?php echo e($i); ?></a>
-                                    </li>
+                                
+                                <?php if($ellipsisStart): ?>
+                                    <li><a href="<?php echo e(route('home.paginate', ['page' => 1])); ?>">1</a></li>
+                                    <?php if($startPage > 2): ?>
+                                        <li class="points">...</li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                
+                                
+                                <?php for($i = $startPage; $i <= $endPage; $i++): ?>
+                                    <li class="<?php echo e($i == $news->currentPage() ? 'active' : ''); ?>"><a href="<?php echo e(route('home.paginate', ['page' => $i])); ?>"><?php echo e($i); ?></a></li>
                                 <?php endfor; ?>
-                        
                                 
-                                <li class="page-item <?php echo e($news->currentPage() == $news->lastPage() ? 'disabled' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($news->nextPageUrl()); ?>" aria-label="Next">
-                                        &raquo;
-                                    </a>
-                                </li>
+                                
+                                <?php if($ellipsisEnd): ?>
+                                    <?php if($endPage < $news->lastPage() - 1): ?>
+                                        <li class="points">...</li>
+                                    <?php endif; ?>
+                                    <li><a href="<?php echo e(route('home.paginate', ['page' => $news->lastPage()])); ?>"><?php echo e($news->lastPage()); ?></a></li>
+                                <?php endif; ?>
+                                
+                                
+                                <?php if($news->currentPage() < $news->lastPage()): ?>
+                                    <li class="next"><a href="<?php echo e($news->nextPageUrl()); ?>"><span>&raquo;</span></a></li>
+                                <?php endif; ?>
                             </ul>
-                        </nav>
+                        </nav> 
+                    <?php endif; ?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                     </div><!-- end article-section -->
                 </div>
             </div>

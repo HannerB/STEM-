@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     public function index() {
         try {
             $users = User::paginate(5);
@@ -85,6 +84,7 @@ class UserController extends Controller
         catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
+    }
 
     public function show(User $user)
     {
@@ -93,13 +93,11 @@ class UserController extends Controller
         return view('dashboard.users.show', compact('user', 'roleName'));
     }
 
-    public function edit(User $user)
-    {
+    public function edit(User $user) {
         return view('dashboard.users.edit', compact('user'));
     }
 
-    public function update(UserUpdateRequest $request, $id)
-    {
+    public function update(UserUpdateRequest $request, $id) {
         $validated = $request->validated();
 
         $user = User::findOrFail($id);
@@ -131,7 +129,6 @@ class UserController extends Controller
 
         return redirect()->route('CardsProfes')->with('success', 'Perfil actualizado exitosamente');
     }
-
 
     protected function updateUserAttributes(User $user, array $validated)
     {

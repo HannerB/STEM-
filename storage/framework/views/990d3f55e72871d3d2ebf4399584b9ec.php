@@ -26,41 +26,35 @@
                             <div class="card-header bg-primary text-white">Editar Perfil</div>
 
                             <div class="card-body">
-                                <form method="POST" action="<?php echo e(route('users.update', Auth::user()->id)); ?>"
-                                    enctype="multipart/form-data">
+                                <form method="POST" action="<?php echo e(route('users.update', Auth::user()->id)); ?>" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('PUT'); ?>
 
                                     <!-- Campos del formulario -->
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            value="<?php echo e(Auth::user()->name); ?>" required>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo e(Auth::user()->name); ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="username">Usuario</label>
-                                        <input type="text" class="form-control" id="username" name="username"
-                                            value="<?php echo e(Auth::user()->username); ?>" required>
+                                        <input type="text" class="form-control" id="username" name="username" value="<?php echo e(Auth::user()->username); ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
-                                        <input type="email" class="form-control" id="email" name="email"
-                                            value="<?php echo e(Auth::user()->email); ?>" required>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo e(Auth::user()->email); ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password">Contraseña</label>
                                         <input type="password" class="form-control" id="password" name="password">
-                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña
-                                            actual.</small>
+                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña actual.</small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirmar Contraseña</label>
-                                        <input type="password" class="form-control" id="password_confirmation"
-                                            name="password_confirmation">
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                                     </div>
 
                                     <div class="form-group">
@@ -68,8 +62,7 @@
                                         <input type="file" class="form-control-file" id="url" name="url">
                                         <?php if(Auth::user()->url): ?>
                                             <div class="mt-2">
-                                                <img src="<?php echo e(Auth::user()->url); ?>" alt="Imagen de perfil"
-                                                    class="img-thumbnail" width="150">
+                                                <img src="<?php echo e(Auth::user()->url); ?>" alt="Imagen de perfil" class="img-thumbnail" width="150">
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -80,78 +73,80 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="position">Cargo</label>
-                                        <input type="text" class="form-control" id="position" name="position"
-                                            value="<?php echo e(Auth::user()->position); ?>">
+                                        <label for="position">Posición</label>
+                                        <input type="text" class="form-control" id="position" name="position" value="<?php echo e(Auth::user()->position); ?>" minlength="25">
                                     </div>
 
-                                    <!-- Mostrar skills -->
+                                    <!-- Mostrar skills si existen -->
+                                    <?php if(Auth::user()->skills->isNotEmpty()): ?>
                                     <div class="form-group">
                                         <label for="skills">Habilidades</label>
-                                        <?php if(Auth::user()->skills->isEmpty()): ?>
-                                            <input type="text" class="form-control mt-2" name="skills[]">
-                                        <?php else: ?>
-                                            <?php $__currentLoopData = Auth::user()->skills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $skill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <input type="text" class="form-control mt-2" name="skills[]"
-                                                    value="<?php echo e($skill->skill); ?>">
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endif; ?>
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar
-                                            habilidad</button>
+                                        <?php $__currentLoopData = Auth::user()->skills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $skill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="input-group mt-2" id="skill-<?php echo e($skill->id); ?>">
+                                                <input type="text" class="form-control" name="skills[]" value="<?php echo e($skill->skill); ?>">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-danger" onclick="removeSkill(<?php echo e($skill->id); ?>)">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar habilidad</button>
                                         <div id="skill-list"></div>
                                     </div>
+                                    <?php endif; ?>
 
-                                    <!-- Mostrar experiences -->
+                                    <!-- Mostrar experiences si existen -->
+                                    <?php if(Auth::user()->experiences->isNotEmpty()): ?>
                                     <div class="form-group">
                                         <label for="experience">Experiencias</label>
-                                        <?php if(Auth::user()->experiences->isEmpty()): ?>
-                                            <input type="text" class="form-control mt-2" name="experiences[]">
-                                        <?php else: ?>
-                                            <?php $__currentLoopData = Auth::user()->experiences; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $experience): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <input type="text" class="form-control mt-2" name="experiences[]"
-                                                    value="<?php echo e($experience->experience); ?>">
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endif; ?>
-                                        <button type="button" class="btn btn-secondary mt-2"
-                                            onclick="addExperience()">Agregar experiencia</button>
+                                        <?php $__currentLoopData = Auth::user()->experiences; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $experience): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="input-group mt-2" id="experience-<?php echo e($experience->id); ?>">
+                                                <input type="text" class="form-control" name="experiences[]" value="<?php echo e($experience->experience); ?>">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-danger" onclick="removeExperience(<?php echo e($experience->id); ?>)">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addExperience()">Agregar experiencia</button>
                                         <div id="experience-list"></div>
                                     </div>
+                                    <?php endif; ?>
 
-                                    <!-- Mostrar educations -->
+                                    <!-- Mostrar educations si existen -->
+                                    <?php if(Auth::user()->educations->isNotEmpty()): ?>
                                     <div class="form-group">
                                         <label for="education">Educación</label>
-                                        <?php if(Auth::user()->educations->isEmpty()): ?>
-                                            <input type="text" class="form-control mt-2" name="educations[]">
-                                        <?php else: ?>
-                                            <?php $__currentLoopData = Auth::user()->educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $education): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <input type="text" class="form-control mt-2" name="educations[]"
-                                                    value="<?php echo e($education->education); ?>">
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endif; ?>
-                                        <button type="button" class="btn btn-secondary mt-2"
-                                            onclick="addEducation()">Agregar educación</button>
+                                        <?php $__currentLoopData = Auth::user()->educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $education): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="input-group mt-2" id="education-<?php echo e($education->id); ?>">
+                                                <input type="text" class="form-control" name="educations[]" value="<?php echo e($education->education); ?>">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-danger" onclick="removeEducation(<?php echo e($education->id); ?>)">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addEducation()">Agregar educación</button>
                                         <div id="education-list"></div>
                                     </div>
+                                    <?php endif; ?>
 
-                                    <!-- Mostrar interests -->
+                                    <!-- Mostrar interests si existen -->
+                                    <?php if(Auth::user()->interests->isNotEmpty()): ?>
                                     <div class="form-group">
                                         <label for="interest">Intereses</label>
-                                        <?php if(Auth::user()->interests->isEmpty()): ?>
-                                            <input type="text" class="form-control mt-2" name="interests[]">
-                                        <?php else: ?>
-                                            <?php $__currentLoopData = Auth::user()->interests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $interest): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <input type="text" class="form-control mt-2" name="interests[]"
-                                                    value="<?php echo e($interest->interest); ?>">
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endif; ?>
-                                        <button type="button" class="btn btn-secondary mt-2"
-                                            onclick="addInterest()">Agregar interés</button>
+                                        <?php $__currentLoopData = Auth::user()->interests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $interest): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="input-group mt-2" id="interest-<?php echo e($interest->id); ?>">
+                                                <input type="text" class="form-control" name="interests[]" value="<?php echo e($interest->interest); ?>">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-danger" onclick="removeInterest(<?php echo e($interest->id); ?>)">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <button type="button" class="btn btn-secondary mt-2" onclick="addInterest()">Agregar interés</button>
                                         <div id="interest-list"></div>
                                     </div>
+                                    <?php endif; ?>
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                     <a href="<?php echo e(route('CardsProfes')); ?>" class="btn btn-secondary">Cancelar</a>
-
                                 </form>
                             </div>
                         </div>
@@ -168,38 +163,59 @@
     <script>
         function addSkill() {
             var skillList = document.getElementById('skill-list');
-            var newInput = document.createElement('input');
-            newInput.type = 'text';
-            newInput.name = 'skills[]';
-            newInput.className = 'form-control mt-2';
-            skillList.appendChild(newInput);
+            var newInputGroup = document.createElement('div');
+            newInputGroup.className = 'input-group mt-2';
+            newInputGroup.innerHTML = '<input type="text" class="form-control" name="skills[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            skillList.appendChild(newInputGroup);
         }
 
         function addExperience() {
             var experienceList = document.getElementById('experience-list');
-            var newInput = document.createElement('input');
-            newInput.type = 'text';
-            newInput.name = 'experiences[]';
-            newInput.className = 'form-control mt-2';
-            experienceList.appendChild(newInput);
+            var newInputGroup = document.createElement('div');
+            newInputGroup.className = 'input-group mt-2';
+            newInputGroup.innerHTML = '<input type="text" class="form-control" name="experiences[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            experienceList.appendChild(newInputGroup);
         }
 
         function addEducation() {
             var educationList = document.getElementById('education-list');
-            var newInput = document.createElement('input');
-            newInput.type = 'text';
-            newInput.name = 'educations[]';
-            newInput.className = 'form-control mt-2';
-            educationList.appendChild(newInput);
+            var newInputGroup = document.createElement('div');
+            newInputGroup.className = 'input-group mt-2';
+            newInputGroup.innerHTML = '<input type="text" class="form-control" name="educations[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            educationList.appendChild(newInputGroup);
         }
 
         function addInterest() {
             var interestList = document.getElementById('interest-list');
-            var newInput = document.createElement('input');
-            newInput.type = 'text';
-            newInput.name = 'interests[]';
-            newInput.className = 'form-control mt-2';
-            interestList.appendChild(newInput);
+            var newInputGroup = document.createElement('div');
+            newInputGroup.className = 'input-group mt-2';
+            newInputGroup.innerHTML = '<input type="text" class="form-control" name="interests[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            interestList.appendChild(newInputGroup);
+        }
+
+        function removeInput(button) {
+            var inputGroup = button.parentElement.parentElement;
+            inputGroup.parentElement.removeChild(inputGroup);
+        }
+
+        function removeSkill(id) {
+            var skillDiv = document.getElementById('skill-' + id);
+            skillDiv.parentElement.removeChild(skillDiv);
+        }
+
+        function removeExperience(id) {
+            var experienceDiv = document.getElementById('experience-' + id);
+            experienceDiv.parentElement.removeChild(experienceDiv);
+        }
+
+        function removeEducation(id) {
+            var educationDiv = document.getElementById('education-' + id);
+            educationDiv.parentElement.removeChild(educationDiv);
+        }
+
+        function removeInterest(id) {
+            var interestDiv = document.getElementById('interest-' + id);
+            interestDiv.parentElement.removeChild(interestDiv);
         }
     </script>
 <?php $__env->stopSection(); ?>

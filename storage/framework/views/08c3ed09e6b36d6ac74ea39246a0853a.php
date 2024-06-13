@@ -39,19 +39,29 @@
                                         <td><?php echo e($user->name); ?></td>
                                         <td><?php echo e($user->username); ?></td>
                                         <td><?php echo e($user->email); ?></td>
-                                        <th><img src="<?php echo e(asset($user->url)); ?>" alt="Imagen de usuario"
-                                                style="max-width: 100px;"></th>
-                                        <td><?php echo e($user->state == 1 ? 'Activo' : 'Inactivo'); ?></td>
                                         <td>
-                                            <?php if($user->role): ?>
-                                            <span class="badge badge-info">
-                                                <?php echo e($user->role->name); ?>
+                                            <?php if($user->url): ?>
+                                                <img src="<?php echo e(asset($user->url)); ?>" alt="<?php echo e($user->name); ?>" style="max-width: 100px;">
+                                            <?php else: ?>
+                                                <i class="material-icons" style="font-size: 50px;">person</i>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <span class="badge <?php echo e($user->state == 1 ? 'badge-success' : 'badge-danger'); ?>">
+                                                <?php echo e($user->state == 1 ? 'Activo' : 'Inactivo'); ?>
 
                                             </span>
+                                        </td>
+                                        <td>
+                                            <?php if($user->role): ?>
+                                                <span class="badge badge-info">
+                                                    <?php echo e($user->role->name); ?>
+
+                                                </span>
                                             <?php else: ?>
-                                            <span class="badge badge-danger">
-                                                No roles
-                                            </span>
+                                                <span class="badge badge-danger">
+                                                    No roles
+                                                </span>
                                             <?php endif; ?>
                                         </td>
                                         <td class="td-actions text-right">
@@ -88,28 +98,40 @@
                     <div class="card-footer text-right">
                         <ul class="pagination">
                             
-                            <li class="page-item <?php echo e($users->onFirstPage() ? 'disabled' : ''); ?>">
-                                <a class="page-link" href="<?php echo e($users->previousPageUrl()); ?>" aria-label="Previous">
-                                    &laquo;
-                                </a>
-                            </li>
-
-                            
-                            <?php for($i = 1; $i <= $users->lastPage(); $i++): ?>
-                                <li class="page-item <?php echo e($i == $users->currentPage() ? 'active' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($users->url($i)); ?>"><?php echo e($i); ?></a>
-                                </li>
-                                <?php endfor; ?>
-
+                            <?php if($users->hasPages()): ?>
                                 
-                                <li
-                                    class="page-item <?php echo e($users->currentPage() == $users->lastPage() ? 'disabled' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($users->nextPageUrl()); ?>" aria-label="Next">
-                                        &raquo;
-                                    </a>
-                                </li>
+                                <?php if(!$users->onFirstPage()): ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<?php echo e($users->previousPageUrl()); ?>" tabindex="-1" aria-disabled="true">&laquo;</a>
+                                    </li>
+                                <?php endif; ?>
+                    
+                                
+                                <?php $__currentLoopData = $users->getUrlRange(1, $users->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($page == 1 || $page == $users->lastPage() || ($page >= max(1, $users->currentPage() - 1) && $page <= min($users->lastPage(), $users->currentPage() + 1))): ?>
+                                        <li class="page-item <?php echo e($page == $users->currentPage() ? 'active' : ''); ?>">
+                                            <a class="page-link" href="<?php echo e($url); ?>"><?php echo e($page); ?></a>
+                                        </li>
+                                    <?php elseif($page == 2 && $users->currentPage() > 3): ?>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&hellip;</span>
+                                        </li>
+                                    <?php elseif($page == $users->lastPage() - 1 && $users->currentPage() < $users->lastPage() - 2): ?>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&hellip;</span>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
+                                
+                                <?php if($users->hasMorePages()): ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<?php echo e($users->nextPageUrl()); ?>">&raquo;</a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </ul>
-                    </div>
+                    </div>                                                                                                                     
                 </div>
             </div>
         </div>

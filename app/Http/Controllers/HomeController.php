@@ -26,8 +26,12 @@ class HomeController extends Controller
         return view('home.newsshow', compact('news'));
     }
 
-    public function news() {
-        $news = News::where('state', 1)->paginate(4);
-        return view('home.news.news', compact('news'));
+    public function news($page = 1) {
+        try {
+            $news = News::where('state', 1)->paginate(3, ['*'], 'page', $page);
+            return view('home.news.news', compact('news'));
+        } catch (\Exception $e) {
+            abort(500, 'Error interno del servidor.');
+        }
     }
 }

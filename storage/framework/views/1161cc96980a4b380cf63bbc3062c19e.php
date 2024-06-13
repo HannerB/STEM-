@@ -12,6 +12,7 @@
 
                         </div>
                         <div class="card-body">
+                            <div id="message" class="alert-message" style="display: none;"></div>
                             <?php if(session('success')): ?>
                             <div class="alert alert-success" role="alert">
                                 <?php echo e(session('success')); ?>
@@ -27,16 +28,17 @@
                                                 <div class="col-lg-6 col-md-6 col-12 mt-n5">
                                                     <div class="p-3 pe-md-0">
                                                         <span class="border border-info">
-                                                            <img src="<?php echo e($news->url); ?>" alt="image"
-                                                                class="w-100 border-radius-md shadow-lg rounded img-fluid ">
+                                                            <img src="<?php echo e($news->url); ?>" alt="<?php echo e($news->slug); ?>" class="w-100 border-radius-md shadow-lg rounded img-fluid ">
                                                         </span>
                                                     </div>
+                                                    <div class="p-1 mb-1 bg-info text-light">ID</div>
+                                                    <p class="text-dark"><?php echo e($news->id); ?></p>
+                                                    <div class="p-1 mb-1 bg-info text-light">Titulo</div>
+                                                    <p class="text-dark"><?php echo e($news->title); ?></p>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-12 my-auto">
                                                    
                                                     <div class="card-body ps-lg-0">
-                                                        <div class="p-1 mb-1 bg-info text-light">ID</div>
-                                                        <p class="text-dark"><?php echo e($news->id); ?></p>
                                                         <div class="p-1 mb-1 bg-info text-light">Descripción</div>
                                                         <p class="text-dark"><?php echo e($news->description); ?></p>
                                                         <div class="p-1 mb-1 bg-info text-light">Fecha de la noticia</div>
@@ -52,7 +54,6 @@
                                         </span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="card-footer">
