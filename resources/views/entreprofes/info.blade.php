@@ -28,43 +28,50 @@
                             <div class="card-header bg-primary text-white">Editar Perfil</div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('users.update', Auth::user()->id) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('users.update', Auth::user()->id) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
                                     <!-- Campos del formulario -->
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ Auth::user()->name }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="username">Usuario</label>
-                                        <input type="text" class="form-control" id="username" name="username" value="{{ Auth::user()->username }}" required>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            value="{{ Auth::user()->username }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" required>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ Auth::user()->email }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password">Contraseña</label>
                                         <input type="password" class="form-control" id="password" name="password">
-                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña actual.</small>
+                                        <small class="form-text text-muted">Dejar en blanco para mantener la contraseña
+                                            actual.</small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirmar Contraseña</label>
-                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                            name="password_confirmation">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="url">Imagen de Perfil</label>
                                         <input type="file" class="form-control-file" id="url" name="url">
-                                        @if(Auth::user()->url)
+                                        @if (Auth::user()->url)
                                             <div class="mt-2">
-                                                <img src="{{ Auth::user()->url }}" alt="Imagen de perfil" class="img-thumbnail" width="150">
+                                                <img src="{{ Auth::user()->url }}" alt="Imagen de perfil"
+                                                    class="img-thumbnail" width="150">
                                             </div>
                                         @endif
                                     </div>
@@ -76,76 +83,139 @@
 
                                     <div class="form-group">
                                         <label for="position">Posición</label>
-                                        <input type="text" class="form-control" id="position" name="position" value="{{ Auth::user()->position }}" minlength="25">
+                                        <input type="text" class="form-control" id="position" name="position"
+                                            value="{{ Auth::user()->position }}">
                                     </div>
 
-                                    <!-- Mostrar skills si existen -->
-                                    @if(Auth::user()->skills->isNotEmpty())
+
+                                    <div class="form-group">
+                                        <label for="area">Área</label>
+                                        <input type="text" name="area" id="area" class="form-control"
+                                            value="{{ Auth::user()->area }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone_number">Número de Teléfono</label>
+                                        <input type="text" name="phone_number" id="phone_number" class="form-control"
+                                            value="{{ Auth::user()->phone_number }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="twitter_link">Link de Twitter</label>
+                                        <input type="url" name="twitter_link" id="twitter_link" class="form-control"
+                                            value="{{ Auth::user()->twitter_link }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="facebook_link">Link de Facebook</label>
+                                        <input type="url" name="facebook_link" id="facebook_link" class="form-control"
+                                            value="{{ Auth::user()->facebook_link }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="linkedin_link">Link de LinkedIn</label>
+                                        <input type="url" name="linkedin_link" id="linkedin_link"
+                                            class="form-control" value="{{ Auth::user()->linkedin_link }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="linkedin_link">Universidad</label>
+                                        <input type="text" name="college" id="college"
+                                            class="form-control" value="{{ Auth::user()->college }}">
+                                    </div>
+
+
+                                    <!-- Mostrar skills -->
                                     <div class="form-group">
                                         <label for="skills">Habilidades</label>
-                                        @foreach(Auth::user()->skills as $skill)
-                                            <div class="input-group mt-2" id="skill-{{ $skill->id }}">
-                                                <input type="text" class="form-control" name="skills[]" value="{{ $skill->skill }}">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-danger" onclick="removeSkill({{ $skill->id }})">Eliminar</button>
+                                        @if (Auth::user()->skills->isNotEmpty())
+                                            @foreach (Auth::user()->skills as $skill)
+                                                <div class="input-group mt-2" id="skill-{{ $skill->id }}">
+                                                    <input type="text" class="form-control" name="skills[]"
+                                                        value="{{ $skill->skill }}">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="removeSkill({{ $skill->id }})">Eliminar</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addSkill()">Agregar habilidad</button>
+                                            @endforeach
+                                        @else
+                                            <input type="text" class="form-control" name="skills[]"
+                                                placeholder="Agregar habilidad">
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addSkill()">Agregar habilidad</button>
                                         <div id="skill-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar experiences si existen -->
-                                    @if(Auth::user()->experiences->isNotEmpty())
+                                    <!-- Mostrar experiences -->
                                     <div class="form-group">
                                         <label for="experience">Experiencias</label>
-                                        @foreach(Auth::user()->experiences as $experience)
-                                            <div class="input-group mt-2" id="experience-{{ $experience->id }}">
-                                                <input type="text" class="form-control" name="experiences[]" value="{{ $experience->experience }}">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-danger" onclick="removeExperience({{ $experience->id }})">Eliminar</button>
+                                        @if (Auth::user()->experiences->isNotEmpty())
+                                            @foreach (Auth::user()->experiences as $experience)
+                                                <div class="input-group mt-2" id="experience-{{ $experience->id }}">
+                                                    <input type="text" class="form-control" name="experiences[]"
+                                                        value="{{ $experience->experience }}">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="removeExperience({{ $experience->id }})">Eliminar</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addExperience()">Agregar experiencia</button>
+                                            @endforeach
+                                        @else
+                                            <input type="text" class="form-control" name="experiences[]"
+                                                placeholder="Agregar experiencia">
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addExperience()">Agregar experiencia</button>
                                         <div id="experience-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar educations si existen -->
-                                    @if(Auth::user()->educations->isNotEmpty())
+                                    <!-- Mostrar educations -->
                                     <div class="form-group">
                                         <label for="education">Educación</label>
-                                        @foreach(Auth::user()->educations as $education)
-                                            <div class="input-group mt-2" id="education-{{ $education->id }}">
-                                                <input type="text" class="form-control" name="educations[]" value="{{ $education->education }}">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-danger" onclick="removeEducation({{ $education->id }})">Eliminar</button>
+                                        @if (Auth::user()->educations->isNotEmpty())
+                                            @foreach (Auth::user()->educations as $education)
+                                                <div class="input-group mt-2" id="education-{{ $education->id }}">
+                                                    <input type="text" class="form-control" name="educations[]"
+                                                        value="{{ $education->education }}">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="removeEducation({{ $education->id }})">Eliminar</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addEducation()">Agregar educación</button>
+                                            @endforeach
+                                        @else
+                                            <input type="text" class="form-control" name="educations[]"
+                                                placeholder="Agregar educación">
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addEducation()">Agregar educación</button>
                                         <div id="education-list"></div>
                                     </div>
-                                    @endif
 
-                                    <!-- Mostrar interests si existen -->
-                                    @if(Auth::user()->interests->isNotEmpty())
+                                    <!-- Mostrar interests -->
                                     <div class="form-group">
                                         <label for="interest">Intereses</label>
-                                        @foreach(Auth::user()->interests as $interest)
-                                            <div class="input-group mt-2" id="interest-{{ $interest->id }}">
-                                                <input type="text" class="form-control" name="interests[]" value="{{ $interest->interest }}">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-danger" onclick="removeInterest({{ $interest->id }})">Eliminar</button>
+                                        @if (Auth::user()->interests->isNotEmpty())
+                                            @foreach (Auth::user()->interests as $interest)
+                                                <div class="input-group mt-2" id="interest-{{ $interest->id }}">
+                                                    <input type="text" class="form-control" name="interests[]"
+                                                        value="{{ $interest->interest }}">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="removeInterest({{ $interest->id }})">Eliminar</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        <button type="button" class="btn btn-secondary mt-2" onclick="addInterest()">Agregar interés</button>
+                                            @endforeach
+                                        @else
+                                            <input type="text" class="form-control" name="interests[]"
+                                                placeholder="Agregar interés">
+                                        @endif
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            onclick="addInterest()">Agregar interés</button>
                                         <div id="interest-list"></div>
                                     </div>
-                                    @endif
 
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                     <a href="{{ route('CardsProfes') }}" class="btn btn-secondary">Cancelar</a>
@@ -158,8 +228,6 @@
         </div>
 
         @include('layouts.footer')
-        <div class="menu-fader"></div>
-        <a id="scroll-top-btn" href="#" title="Volver arriba">&#8593;</a>
     </div>
 
     <script>
@@ -167,7 +235,8 @@
             var skillList = document.getElementById('skill-list');
             var newInputGroup = document.createElement('div');
             newInputGroup.className = 'input-group mt-2';
-            newInputGroup.innerHTML = '<input type="text" class="form-control" name="skills[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            newInputGroup.innerHTML =
+                '<input type="text" class="form-control" name="skills[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
             skillList.appendChild(newInputGroup);
         }
 
@@ -175,7 +244,8 @@
             var experienceList = document.getElementById('experience-list');
             var newInputGroup = document.createElement('div');
             newInputGroup.className = 'input-group mt-2';
-            newInputGroup.innerHTML = '<input type="text" class="form-control" name="experiences[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            newInputGroup.innerHTML =
+                '<input type="text" class="form-control" name="experiences[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
             experienceList.appendChild(newInputGroup);
         }
 
@@ -183,7 +253,8 @@
             var educationList = document.getElementById('education-list');
             var newInputGroup = document.createElement('div');
             newInputGroup.className = 'input-group mt-2';
-            newInputGroup.innerHTML = '<input type="text" class="form-control" name="educations[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            newInputGroup.innerHTML =
+                '<input type="text" class="form-control" name="educations[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
             educationList.appendChild(newInputGroup);
         }
 
@@ -191,7 +262,8 @@
             var interestList = document.getElementById('interest-list');
             var newInputGroup = document.createElement('div');
             newInputGroup.className = 'input-group mt-2';
-            newInputGroup.innerHTML = '<input type="text" class="form-control" name="interests[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
+            newInputGroup.innerHTML =
+                '<input type="text" class="form-control" name="interests[]"><div class="input-group-append"><button type="button" class="btn btn-danger" onclick="removeInput(this)">Eliminar</button></div>';
             interestList.appendChild(newInputGroup);
         }
 

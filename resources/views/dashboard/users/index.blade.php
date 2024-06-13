@@ -96,41 +96,29 @@
                     </div>
                     <div class="card-footer text-right">
                         <ul class="pagination">
-                            {{-- Verifica si hay páginas disponibles --}}
-                            @if ($users->hasPages())
-                                {{-- Enlace a la página anterior --}}
-                                @if (!$users->onFirstPage())
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $users->previousPageUrl() }}" tabindex="-1" aria-disabled="true">&laquo;</a>
-                                    </li>
-                                @endif
-                    
-                                {{-- Mostrar los números de página --}}
-                                @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
-                                    @if ($page == 1 || $page == $users->lastPage() || ($page >= max(1, $users->currentPage() - 1) && $page <= min($users->lastPage(), $users->currentPage() + 1)))
-                                        <li class="page-item {{ $page == $users->currentPage() ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @elseif ($page == 2 && $users->currentPage() > 3)
-                                        <li class="page-item disabled">
-                                            <span class="page-link">&hellip;</span>
-                                        </li>
-                                    @elseif ($page == $users->lastPage() - 1 && $users->currentPage() < $users->lastPage() - 2)
-                                        <li class="page-item disabled">
-                                            <span class="page-link">&hellip;</span>
-                                        </li>
-                                    @endif
-                                @endforeach
-                    
-                                {{-- Enlace a la página siguiente --}}
-                                @if ($users->hasMorePages())
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ $users->nextPageUrl() }}">&raquo;</a>
-                                    </li>
-                                @endif
-                            @endif
+                            {{-- Previous Page Link --}}
+                            <li class="page-item {{ $users->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $users->previousPageUrl() }}" aria-label="Previous">
+                                    &laquo;
+                                </a>
+                            </li>
+
+                            {{-- Pagination Elements --}}
+                            @for ($i = 1; $i <= $users->lastPage(); $i++)
+                                <li class="page-item {{ $i == $users->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
+                                </li>
+                                @endfor
+
+                                {{-- Next Page Link --}}
+                                <li
+                                    class="page-item {{ $users->currentPage() == $users->lastPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $users->nextPageUrl() }}" aria-label="Next">
+                                        &raquo;
+                                    </a>
+                                </li>
                         </ul>
-                    </div>                                                                                                                     
+                    </div>
                 </div>
             </div>
         </div>

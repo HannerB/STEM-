@@ -14,11 +14,6 @@
                                 <p class="card-category">Ingresar datos</p>
                             </div>
                             <div class="card-body">
-                                @if ($errors->has('fields'))
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $errors->first('fields') }}
-                                    </div>
-                                @endif
                                 <div class="row">
                                     <label for="name" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-7">
@@ -99,7 +94,6 @@
     </div>
 @endsection
 
-
 @section('js')
     <script>
         Dropzone.autoDiscover = false;
@@ -140,26 +134,18 @@
                     });
 
                     this.on("success", function(file, response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: response.success ? 'Éxito' : 'Error',
-                            text: response.success ? response.success : 'Error al subir la imagen',
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed && response.success) {
-                                window.location.href = response.redirect;
-                            }
-                        });
+                        alert(response.success);
+                        if (response.success) {
+                            window.location.href = response.redirect;
+                        }
                     });
 
                     this.on("error", function(file, response) {
-                        var errorMessage = typeof response.message !== "undefined" ? response.message : 'Error al subir la imagen';
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: errorMessage,
-                            confirmButtonText: 'OK'
-                        });
+                        if (typeof response.message !== "undefined") {
+                            alert(response.message);
+                        } else {
+                            alert("Error al subir la imagen");
+                        }
                     });
                 } 
             });

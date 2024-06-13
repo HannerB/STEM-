@@ -22,59 +22,141 @@
             <div class="container portada">
             </div>
 
+            <div class="contenedorTodo">
+                <div id="OoIqaBtE8gcvfHrm" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+                    <div id="vXHXxaVqiaIW2bIs" style="z-index:5;">
+                        <div id="E1aW14bj0wY3EHRM"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="binpjfGJb8rd6byc"
+                                style="flex-direction:column;display:flex;width:100%;justify-content:center;opacity:1.0;height:100%;">
+                                <p id="HtYhXi0oseYyNm5f"
+                                    style="margin-left:0em;text-transform:none;color:#0a1a44;letter-spacing:0em;line-height:1.11em;direction:ltr;text-align:left;">
+                                    <span id="NG6XPfMj0e2s0gIY" style="color:#0a1a44;">Profe:</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="okcGzqcAmaH8JMLm" style="z-index:2;">
+                        <div id="BaNhk9oCGf89x7VR"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="BChTaL4XpJ1r691A"
+                                style="flex-direction:column;display:flex;width:100%;justify-content:center;opacity:1.0;height:100%;">
+                                <p id="RHr7OfxzWHIM8uMx"
+                                    style="color:#e5e900;letter-spacing:-0.05em;line-height:0.95em;text-align:left;">
+                                    <span id="vMZDs3Vlf2RU2Ycu" style="color:#e5e900;">{{ $user->name }}</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="XZUby9llywuX0vgj" style="z-index:3;">
+                        <div id="Z2J4ZhVrfJ6Jsef9"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="gJM18FFo6BYSP717"
+                                style="flex-direction:column;display:flex;width:100%;justify-content:center;opacity:1.0;height:100%;">
+                                <p id="KR4WJiQ1xa0yzwFF"
+                                    style="text-transform:uppercase;color:#000000;letter-spacing:0.05em;line-height:1.3em;text-align:left;">
+                                    <span id="iJzmLwYcYP17x5yl" style="color:#000000;">{{ $user->college }}</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="q3vm7yDvuKt2iup3" style="z-index:4;">
+                        <div id="QfNXx1ipwHQiC8xz"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="N1jvDG0RDBbcPwCY"
+                                style="flex-direction:column;display:flex;width:100%;justify-content:center;opacity:1.0;height:100%;">
+                                <p id="ISW3vLfZkte1GfLp"
+                                    style="margin-left:0em;text-transform:none;color:#0a1a44;letter-spacing:0em;line-height:1.5em;direction:ltr;text-align:justify;">
+                                    <span id="hivFk7C4KwvoftGl" style="color:#0a1a44;">&quot;{{ $user->note }}".
+                                    </span>
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="DBvHd3iTlIj0Fog9" style="z-index:1;">
+                        <div id="njm0ZrAgkMJWG2Le" style="padding-top:66.625%;transform:rotate(0deg);">
+                            <div id="XKBSQKJfsAM3jXaJ" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="s6825kVJ0Qd4bJI3" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="nYu1Dc8YTqwMUYI5"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="WPaNrWdIZm9BUZsU"
+                                            style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/323809c5d7310dabe8557d9a4ea821b6.webp') }}"
+                                                alt="Young attractive students of mechatronics working on project"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </section>
+
+            </div>
+
+
+
             <div id="SlBZW460vgtIGCMW" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
                 <div id="dEQyBedhz89fLLmg" style="z-index:43;">
                     <div id="sxqVBEmXiXWtB165" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
                         <div id="ro26rM5HDhEZwYxu"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            <p id="OIBsBzHY0hNS0uXN" style="color:#000000;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                <span id="ng1Vyw7gtv7RcIvu" style="color:#000000;">Área: Tecnología</span>
+                            <p id="OIBsBzHY0hNS0uXN" style="color:#000000;line-height:1.4em;">
+                                <span id="ng1Vyw7gtv7RcIvu" style="color:#000000;">Área: {{ $user->area }}</span>
                             </p>
-                            <p id="wqBHlA9BeWvANiig" style="color:#000000;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
+                            <p id="wqBHlA9BeWvANiig" style="color:#000000;line-height:1.4em;">
                                 <span id="UKThp7GIwuQbh1GX" style="color:#000000;">Correo:
-                                    jair.barrios@sedbarranquilla.edu.co</span>
+                                    {{ $user->email }}</span>
                             </p>
-                            <p id="IyXrabceSf6zQTzd"
-                                style="color:#000000;font-family:YAFdSQYNjgw-0;line-height:1.4em;text-align:left;"><span
-                                    id="YSQk8i0Ba7fYVUSX" style="color:#000000;">Tel: 3013529695</span><br></p>
+                            <p id="IyXrabceSf6zQTzd" style="color:#000000;line-height:1.4em;text-align:left;"><span
+                                    id="YSQk8i0Ba7fYVUSX" style="color:#000000;">Tel:
+                                    {{ $user->phone_number }}</span><br>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div id="DnsK5NHGK41GGfcL" style="z-index:33;">
+                <div id="DnsK5NHGK41GGfcL" style="z-index: 33;">
                     <div id="JFuLS5wKJU15LFVK"
-                        style="transform:rotate(-90deg);width:100%;box-sizing:border-box;height:100%;">
+                        style="transform: rotate(-90deg); width: 100%; box-sizing: border-box; height: 100%;">
                         <div id="kSP2OCMszidNrMrM"
-                            style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
+                            style="flex-direction: column; display: flex; width: 100%; justify-content: flex-start; opacity: 1.0; height: 100%;">
                             <p id="NBmH228k9Y4WIPV4"
-                                style="color:#000000;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.2em;text-align:center;">
-                                <span id="meJfvddcIzkkk03q" style="color:#000000;">Douglas Galveston</span><br>
+                                style="color: #000000; letter-spacing: 0em; line-height: 1.2em; text-align: center;">
+                                <span id="meJfvddcIzkkk03q" style="color: #000000;">
+                                    {{ $user->name }}
+                                </span><br>
                             </p>
                         </div>
                     </div>
                 </div>
-                <div id="DCtVfpnwdKVb7Lz3" style="z-index:15;">
-                    <div id="pLnZh11V1UbVgE7M" style="padding-top:99.9996%;transform:rotate(0deg);">
-                        <div id="nudSHQrJWRFyYEph" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+
+                <div id="DCtVfpnwdKVb7Lz3" style="z-index: 15;">
+                    <div id="pLnZh11V1UbVgE7M" style="padding-top: 99.9996%; transform: rotate(0deg);">
+                        <div id="nudSHQrJWRFyYEph"
+                            style="top: 0px; left: 0px; width: 100%; position: absolute; height: 100%;">
                             <svg id="rDG56E28UJCehfqV" viewBox="0 0 500.0 499.998"
-                                style="overflow:hidden;top:0%;left:0%;width:100%;position:absolute;opacity:1.0;height:100%;">
-                                <g id="Jhl9fZsUeIpP9ixv" style="transform:scale(1, 1);">
-                                    <foreignobject id="acLCUahOhXp0ZkSA" style="width:500px;height:499.998px;">
+                                style="overflow: hidden; top: 0%; left: 0%; width: 100%; position: absolute; opacity: 1.0; height: 100%;">
+                                <g id="Jhl9fZsUeIpP9ixv" style="transform: scale(1, 1);">
+                                    <foreignObject id="acLCUahOhXp0ZkSA" style="width: 500px; height: 499.998px;">
                                         <div id="w72cVcJT5Gz4q0ON"
                                             style="clip-path: path('M500 250.002c0 138.065-111.931 249.996-250 249.996-138.071 0-250-111.931-250-249.996C0 111.93 111.929 0 250 0s250 111.93 250 250.002z');">
                                             <div id="IG4ChFgAxRfKJTAF"
                                                 style="transform: scale(1, 1); transform-origin: 250px 250px;">
-                                                <img src="{{ asset('images/8351af0c3a2c0afe1909a1065b11d5ce.webp') }}"
+                                                <img src="{{ $user->url ? asset($user->url) : asset('images/default-profile.png') }}"
                                                     title="imagen" loading="lazy"
                                                     style="transform: translate(-4.65969453px, 0px) rotate(0deg); display: block; object-fit: fill; width: 524.64115988px; transform-origin: 262.32057994px 393.48086991px; opacity: 1.0; height: 786.96173982px;">
                                             </div>
                                         </div>
-
-                                    </foreignobject>
+                                    </foreignObject>
                                 </g>
                             </svg>
                         </div>
                     </div>
                 </div>
+
                 <div id="Grb3vjRsn5n2Bfz8" style="z-index:17;">
                     <div id="vsIwAfcYSwIkdVGa" style="padding-top:100%;transform:rotate(1deg);">
                         <div id="M4VDqsucsIBeGslu" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
@@ -83,8 +165,9 @@
                                     style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
                                     <div id="blZcFAD3mVO3XJIM"
                                         style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                                        <img src="images/aecd49c5564f46c2b305f9cc0e3ee672.svg" alt="Facebook Circle Logo"
-                                            loading="lazy" style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        <img src=" {{ asset('images/aecd49c5564f46c2b305f9cc0e3ee672.svg') }} "
+                                            alt="Facebook Circle Logo" loading="lazy"
+                                            style="display:block;object-fit:cover;width:100%;height:100%;">
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +182,9 @@
                                     style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
                                     <div id="Ovm6ehYfiMWJRPEp"
                                         style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                                        <img src="images/c329adb0878be20ebe7ff1f283db99b7.svg" alt="In Blue Logo Vector"
-                                            loading="lazy" style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        <img src=" {{ asset('images/c329adb0878be20ebe7ff1f283db99b7.svg') }} "
+                                            alt="In Blue Logo Vector" loading="lazy"
+                                            style="display:block;object-fit:cover;width:100%;height:100%;">
                                     </div>
                                 </div>
                             </div>
@@ -115,8 +199,9 @@
                                     style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
                                     <div id="cp4YPwFoEUDFXki8"
                                         style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                                        <img src="images/ca2acae4cc94f1945763f4b33c278106.svg" alt="Twitter Logo"
-                                            loading="lazy" style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        <img src="{{ asset('images/ca2acae4cc94f1945763f4b33c278106.svg') }}"
+                                            alt="Twitter Logo" loading="lazy"
+                                            style="display:block;object-fit:cover;width:100%;height:100%;">
                                     </div>
                                 </div>
                             </div>
@@ -129,9 +214,10 @@
                         <div id="NN4v4Nw2BSgYb593"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                             <p id="BUSn3H3w82iDmxFP"
-                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;direction:ltr;text-align:left;">
+                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:left;">
                                 <span id="GXOAqHAqqMYPVN3p" style="color:#000000;">@</span><span id="x81E7dwQRRuBk6TF"
-                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;">qbprofe</span>
+                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;"><a
+                                        href="{{ $user->facebook_link }}">{{ $user->name }}</a></span>
                             </p>
                         </div>
                     </div>
@@ -142,9 +228,10 @@
                         <div id="VYI5zBOPAZU7RJo5"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                             <p id="bUIhaMFYugKsO7e6"
-                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;direction:ltr;text-align:left;">
+                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:left;">
                                 <span id="aRWkSyFOkTq5pk1v" style="color:#000000;">@</span><span id="CS47Kh0ndenqbNHs"
-                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;">qbprofe</span>
+                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;"><a
+                                        href="{{ $user->linkedin_link }}">{{ $user->name }}</a></span>
                             </p>
                         </div>
                     </div>
@@ -155,9 +242,10 @@
                         <div id="Oofl8xcOeJIiePTh"
                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                             <p id="oy0u75unzmR6JSjd"
-                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;font-family:YAFdSQYNjgw-0;line-height:1.4em;direction:ltr;text-align:left;">
+                                style="margin-left:0em;text-transform:none;color:#000000;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:left;">
                                 <span id="OnqhT54NjPnZ4zGX" style="color:#000000;">@</span><span id="CJU80JyEI6Q7FGAn"
-                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;">qbprofe</span>
+                                    style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;"><a
+                                        href="{{ $user->facebook_link }}">{{ $user->name }}</a></span>
                             </p>
                         </div>
                     </div>
@@ -221,7 +309,7 @@
                                         <div id="IJH7raCBT90DfuVv"
                                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                             <p id="wukWOxm5oRGk4Mht"
-                                                style="margin-left:0em;text-transform:uppercase;color:#ffffff;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;direction:ltr;text-align:center;">
+                                                style="margin-left:0em;text-transform:uppercase;color:#ffffff;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:center;">
                                                 <span id="zwwJQwQWRKlClJMm" style="color:#ffffff;">I</span><br>
                                             </p>
                                         </div>
@@ -269,7 +357,7 @@
                                         <div id="NXdQhgCCJ0YSrHag"
                                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                             <p id="EADZniMYOe6W5piT"
-                                                style="text-transform:uppercase;color:#000000;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;text-align:center;">
+                                                style="text-transform:uppercase;color:#000000;letter-spacing:0em;line-height:1.4em;text-align:center;">
                                                 <span id="qrHT3W3lSRWVj4Q0" style="color:#000000;">H</span><br>
                                             </p>
                                         </div>
@@ -377,7 +465,7 @@
                                         <div id="QpyOYUK9dF3o8XLs"
                                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                             <p id="aEJIgdmX6E29cESE"
-                                                style="margin-left:0em;text-transform:uppercase;color:#161616;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;direction:ltr;text-align:center;">
+                                                style="margin-left:0em;text-transform:uppercase;color:#161616;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:center;">
                                                 <span id="YLj8DBp8UMRoAWyi" style="color:#161616;">E</span><br>
                                             </p>
                                         </div>
@@ -425,7 +513,7 @@
                                         <div id="fvu51JXP4Pj7yu9m"
                                             style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                             <p id="cbxMnqLL4OOUXekw"
-                                                style="margin-left:0em;text-transform:uppercase;color:#000000;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;direction:ltr;text-align:center;">
+                                                style="margin-left:0em;text-transform:uppercase;color:#000000;letter-spacing:0em;line-height:1.4em;direction:ltr;text-align:center;">
                                                 <span id="MruvzkiTWYdfVcBM"
                                                     style="text-decoration-line:none;color:#000000;font-weight:400;font-style:normal;">E</span>
                                             </p>
@@ -458,7 +546,7 @@
                                 <div id="Kum6RWUb099hzxGq"
                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                     <p id="fjtxGNWIHeDVgXc9"
-                                        style="color:#ffffff;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;text-align:center;">
+                                        style="color:#ffffff;letter-spacing:0em;line-height:1.4em;text-align:center;">
                                         <span id="Ae4fPlEzgKehjdlv" style="color:#ffffff;">Intereses</span><br>
                                     </p>
                                 </div>
@@ -488,7 +576,7 @@
                                 <div id="Qi13tEvW0MZijo8n"
                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                     <p id="a4Sr1Jm3BS6LHkml"
-                                        style="color:#fefefe;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;text-align:center;">
+                                        style="color:#fefefe;letter-spacing:0em;line-height:1.4em;text-align:center;">
                                         <span id="oXiqUJvMaC8HylQq" style="color:#fefefe;">Habilidades</span><br>
                                     </p>
                                 </div>
@@ -526,29 +614,30 @@
                         </div>
                     </div>
                 </div>
-                <div id="cQqKSmIBLBMVnTkT" style="z-index:39;">
+                <div id="cQqKSmIBLBMVnTkT" style="z-index: 39;">
                     <div id="oWKcACpk5olmvMef"
-                        style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                        style="transform: rotate(0deg); width: 100%; box-sizing: border-box; height: 100%;">
                         <div id="QzNMH6qB800ouchQ"
-                            style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            @foreach ($users as $user)
-                                <ul id="VWK7l5LufJKIUsw0">
-                                    @php
-                                        $interests = json_decode($user->interests);
-                                    @endphp
-                                    @if (is_array($interests))
-                                        @foreach ($interests as $interest)
-                                            <li id="{{ $user->id }}"
-                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                                <span>{{ $interest->interest }}</span>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            @endforeach
+                            style="flex-direction: column; display: flex; width: 100%; justify-content: flex-start; opacity: 1.0; height: 100%;">
+                            <ul id="VWK7l5LufJKIUsw0">
+                                @php
+                                    $interests = json_decode($user->interests);
+                                @endphp
+                                @if (is_array($interests))
+                                    @foreach ($interests as $interest)
+                                        <li
+                                            style="margin-left: 1.7em; color: #000000; list-style-type: disc;line-height: 1.4em;">
+                                            <span>{{ $interest->interest }}</span>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>
+
+
+
                 <div id="wnInq9Aj6s1yZzw2">
                     <div id="oyr5mNF0MiOtrdnj" style="display:grid;position:relative;">
                         <div id="OC4qDn25QgnAp3Q3" style="z-index:3;">
@@ -571,7 +660,7 @@
                                 <div id="cAfJcZ4c2BlybNCU"
                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                     <p id="MJvxCrNpuXeiN7kV"
-                                        style="color:#fefefe;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;text-align:center;">
+                                        style="color:#fefefe;letter-spacing:0em;line-height:1.4em;text-align:center;">
                                         <span id="sVIgeeJQfFZ6Aztm" style="color:#fefefe;">Educación</span><br>
                                     </p>
                                 </div>
@@ -601,7 +690,7 @@
                                 <div id="IwkUbXDi90u0cgTt"
                                     style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
                                     <p id="so4JdNubJCmB3R0L"
-                                        style="color:#fefefe;letter-spacing:0em;font-family:YAFdSLfltFs-0;line-height:1.4em;text-align:center;">
+                                        style="color:#fefefe;letter-spacing:0em;line-height:1.4em;text-align:center;">
                                         <span id="NOsxob2rn3Sdo3lW" style="color:#fefefe;">Experiencia
                                             Profesional</span><br>
                                     </p>
@@ -610,77 +699,72 @@
                         </div>
                     </div>
                 </div>
-                <div id="kbGF6LCy1OdS5gwW" style="z-index:32;">
+                <div id="kbGF6LCy1OdS5gwW" style="z-index: 32;">
                     <div id="lyIyk8IMYCjq3XJh"
-                        style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                        style="transform: rotate(0deg); width: 100%; box-sizing: border-box; height: 100%;">
                         <div id="Teu1dT64idmsHdzA"
-                            style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            @foreach ($users as $user)
-                                <ul id="VWK7l5LufJKIUsw0">
-                                    @php
-                                        $experiences = json_decode($user->experiences);
-                                    @endphp
-                                    @if (is_array($experiences))
-                                        @foreach ($experiences as $experience)
-                                            <li id="{{ $user->id }}"
-                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                                <span>{{ $experience->experience }}</span>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            @endforeach
+                            style="flex-direction: column; display: flex; width: 100%; justify-content: flex-start; opacity: 1.0; height: 100%;">
+                            <ul id="VWK7l5LufJKIUsw0">
+                                @php
+                                    $experiences = json_decode($user->experiences);
+                                @endphp
+                                @if (is_array($experiences))
+                                    @foreach ($experiences as $experience)
+                                        <li
+                                            style="margin-left: 1.7em; color: #000000; list-style-type: disc; line-height: 1.4em;">
+                                            <span>{{ $experience->experience }}</span>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div id="F6f12VgPp2KdXoKD" style="z-index:31;">
+
+                <div id="F6f12VgPp2KdXoKD" style="z-index: 31;">
                     <div id="UJ545QPtzcwwa600"
-                        style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                        style="transform: rotate(0deg); width: 100%; box-sizing: border-box; height: 100%;">
                         <div id="NtQFkZB9ajuTjgDD"
-                            style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            @foreach ($users as $user)
-                                <ul id="VWK7l5LufJKIUsw0">
-                                    @php
-                                        $educations = json_decode($user->educations);
-                                    @endphp
-                                    @if (is_array($educations))
-                                        @foreach ($educations as $education)
-                                            <li id="{{ $user->id }}"
-                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                                <span>{{ $education->education }}</span>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            @endforeach
-
+                            style="flex-direction: column; display: flex; width: 100%; justify-content: flex-start; opacity: 1.0; height: 100%;">
+                            <ul id="VWK7l5LufJKIUsw0">
+                                @php
+                                    $educations = json_decode($user->educations);
+                                @endphp
+                                @if (is_array($educations))
+                                    @foreach ($educations as $education)
+                                        <li
+                                            style="margin-left: 1.7em; color: #000000; list-style-type: disc; line-height: 1.4em;">
+                                            <span>{{ $education->education }}</span>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div id="nnyipCHFCqb6cObT" style="z-index:30;">
+
+                <div id="nnyipCHFCqb6cObT" style="z-index: 30;">
                     <div id="WSky9FHDr8WlICAX"
-                        style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                        style="transform: rotate(0deg); width: 100%; box-sizing: border-box; height: 100%;">
                         <div id="XB4jHZS6XXOjcfzu"
-                            style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
-                            @foreach ($users as $user)
-                                <ul id="VWK7l5LufJKIUsw0">
-                                    @php
-                                        $skills = json_decode($user->skills);
-                                    @endphp
-                                    @if (is_array($skills))
-                                        @foreach ($skills as $skill)
-                                            <li id="{{ $user->id }}"
-                                                style="margin-left:1.7em;color:#000000;list-style-type:disc;font-family:YAFdSQYNjgw-0;line-height:1.4em;">
-                                                <span>{{ $skill->skill }}</span>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            @endforeach
+                            style="flex-direction: column; display: flex; width: 100%; justify-content: flex-start; opacity: 1.0; height: 100%;">
+                            <ul id="VWK7l5LufJKIUsw0">
+                                @php
+                                    $skills = json_decode($user->skills);
+                                @endphp
+                                @if (is_array($skills))
+                                    @foreach ($skills as $skill)
+                                        <li
+                                            style="margin-left: 1.7em; color: #000000; list-style-type: disc; line-height: 1.4em;">
+                                            <span>{{ $skill->skill }}</span>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
                     </div>
-
                 </div>
+
                 <div id="qE43gFLjN2c9eqqj" style="z-index:63;">
                     <div id="oqMTE25687AQoPjX" style="padding-top:21.7644272%;transform:rotate(0deg);">
                         <div id="OH2FVBKe2j4HHcqC" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
@@ -689,19 +773,151 @@
                                     style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
                                     <div id="xBBvsnKuV4RNxXey"
                                         style="transform:rotate(0deg);top:-67.7605554%;left:0%;width:108.73031671%;position:absolute;height:277.54340119%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                                        <img src="images/e973ec3604184aa987e0aba85d4c9a24.webp" title="imagen"
-                                            loading="lazy" style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        <img src="{{ asset('images/e973ec3604184aa987e0aba85d4c9a24.webp') }}"
+                                            title="imagen" loading="lazy"
+                                            style="display:block;object-fit:cover;width:100%;height:100%;">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
+
+
+
+
+            <section id="Esy3eSxlfKMGtZr8"
+                style="z-index:0;overflow:hidden;grid-template-columns:auto 100rem auto;display:grid;margin-top:-1px;position:relative;align-items:center;">
+                <div id="b97YjIvXfQAr9iXW"
+                    style="display:grid;min-height:100%;position:absolute;grid-area:1 / 1 / 2 / 4;min-width:100%;">
+                    <div id="JlIE0Bvf58H1D8aZ" style="z-index:0;">
+                        <div id="FOhtSpdJi0l2eQmb"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="eLR1TyfF6HFPc0ym" style="width:100%;opacity:1.0;height:100%;">
+                                <div id="R2PAJVVccIPfzz6s"
+                                    style="background-color:#ffffff;transform:scale(1, 1);overflow:hidden;width:100%;position:relative;opacity:1.0;height:100%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gqYTmhKOx2ZqYNSR" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+                    <div id="W4r0a2hPkymeiSJk" style="z-index:6;">
+                        <div id="Q7F32AG8q0C22vg1"
+                            style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="u4md5dXCj7KwN07B"
+                                style="flex-direction:column;display:flex;width:100%;justify-content:center;opacity:1.0;height:100%;">
+                                <p id="WGNfssToqXIerxGa"
+                                    style="margin-left:0em;text-transform:none;color:#0a1a44;letter-spacing:0em;line-height:1.11em;direction:ltr;text-align:left;">
+                                    <span id="DihZukCwE4s4yoqx" style="color:#0a1a44;">Sitios de Interés</span><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="aycvxrMTtBixOSCP" style="z-index:1;">
+                        <div id="iwS1IEaxy76M87Ap" style="padding-top:20.23121387%;transform:rotate(0deg);">
+                            <div id="KA1uAkdsUWwqXt9m" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="yvEXMcKSFNzM5eLY" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="ArA8Klrlzbd2SRdv"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="AJ5wgL9zyI6INu3k"
+                                            style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/837e5388e1ad539913776e78c232055b.webp') }}"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="HxRYTFLbJVzGgnDG" style="z-index:3;">
+                        <div id="HTzB8PmNneL2OkFS" style="padding-top:38.33333333%;transform:rotate(0deg);">
+                            <div id="LsKoCkNaQkRfvelR" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="dguOZbrsFn7I5FWr" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="DgoehhOFPNjU9Z6X"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="ubI4eLkpJkzg3ldb"
+                                            style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/ee6a76e24c6af2ba4ce829199d6e356d.webp') }}"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="QUyK700CowjdzWHi" style="z-index:4;">
+                        <div id="ji0IztejDib2CiFS" style="padding-top:32.94599459%;transform:rotate(0deg);">
+                            <div id="QXMsPR15hlBJ2GeA" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="G8xUoangTTtiuVcl" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="PGWdg5uCdCniSENl"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="qOcTSYLUJCrNeO0d"
+                                            style="transform:rotate(0deg);top:-96.30845467%;left:0%;width:100%;position:absolute;height:303.52703342%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/97e92469e364c55f54b10393032df5e7.webp') }}"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="NKHaeKoPmdfO2Whc" style="z-index:2;">
+                        <div id="TFKU7Zso6TsMUIy6" style="padding-top:41.29261284%;transform:rotate(0deg);">
+                            <div id="HtuXXY2xITH6oZT1" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="QgbEMmgQpd8oTeEY" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="Q06QARtRsqbu9bRq"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="bB4xMNfltiRpIdEH"
+                                            style="transform:rotate(0deg);top:-11.31578717%;left:0%;width:100%;position:absolute;height:136.22291284%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/f2fd238d7e8c803bcd296c2a29713359.webp') }}"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="auaARMmh9PB69Fn3" style="z-index:5;">
+                        <div id="RPTIsWgbgnN4ePgZ" style="padding-top:25.39325843%;transform:rotate(0deg);">
+                            <div id="aDK1PVLKnP2Y1ckD" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="uoGXnaBoA3u6qS5z" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="au8wViKOtcc9vGKX"
+                                        style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="dIBgBud7flDtMA6f"
+                                            style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                                            <img src="{{ asset('images/9ba749e0299413f57d5a6f13d08a2165.webp') }}"
+                                                loading="lazy"
+                                                style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
         @include('layouts.footer')
-        <div class="menu-fader"></div>
-        <a id="scroll-top-btn" href="#" title="Volver arriba">&#8593;</a>
     </div>
+
+    <style>
+        .contenedorTodo {
+            margin-left: 200px;
+        }
+
+        @media (max-width: 1500px) {
+            .contenedorTodo {
+                margin-left: 0;
+            }
+        }
+    </style>
 @endsection

@@ -1,4 +1,4 @@
-@extends('dashboard', ['activePage' => 'news', 'titlePage' => 'Crear Noticia'])
+@extends('dashboard', ['activePage' => 'news', 'titlePage' => 'Nueva Noticia'])
 
 @section('content')
 <div class="content">
@@ -10,54 +10,58 @@
                     <div class="card">
                         <div class="card-header card-header-info">
                             <h4 class="card-title">Noticia</h4>
-                            <p class="card-category">Ingrese los datos de la nueva noticia</p>
+                            <p class="card-category">Ingresar datos</p>
                         </div>
                         <div class="card-body">
-                            @if ($errors->any())
-                            <div class="alert alert-danger" role="alert">
-                                @foreach ($errors->all() as $error)
-                                    <p>{{ $error }}</p>
-                                @endforeach
-                            </div>
-                            @endif
-                            <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Título</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="title" id="title" placeholder="Ingrese el Título" value="{{ old('title') }}" autofocus required>
+                            <!-- Campos del formulario aquí -->
+                            <div class="row">
+                                <label for="title" class="col-sm-2 col-form-label">Titulo</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Ingrese el Título" value="{{ old('title') }}" autofocus>
+                                    @if ($errors->has('title'))
+                                    <span class="invalid-feedback" role="alert">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="description" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="description" id="description" placeholder="Ingrese la Descripción" required>{{ old('description') }}</textarea>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control form-group" name="description" id="description" placeholder="Ingrese la Descripción">{{ old('description') }}</textarea>
+                                    @if ($errors->has('description'))
+                                    <span class="invalid-feedback" role="alert">{{ $errors->first('description') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="content" class="col-sm-2 col-form-label">Contenido</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="content" id="content" placeholder="Ingrese el Contenido" required>{{ old('content') }}</textarea>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control form-group" name="content" id="content" placeholder="Ingrese el Contenido">{{ old('content') }}</textarea>
+                                    @if ($errors->has('content'))
+                                    <span class="invalid-feedback" role="alert">{{ $errors->first('content') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="images" class="col-sm-2 col-form-label">Imágenes</label>
-                                <div class="col-sm-10">
-                                    <div id="dropzoneNews" class="dropzone">
-                                        <div class="fallback">
-                                            <input type="file" name="images[]" multiple>
-                                        </div>
-                                    </div>
-                                    <span class="text-danger" id="images-error"></span>
+                            <div class="row">
+                                <label for="url" class="col-sm-2 col-form-label">Imagen</label>
+                                <div class="col-sm-7">
+                                    <div id="dropzoneNews" class="dropzone form-group"></div>
+                                    @error('url')
+                                        <span class="error text-danger" id="error-url">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="row">
                                 <label for="date_of_the_new_story" class="col-sm-2 col-form-label">Fecha de la noticia</label>
-                                <div class="col-sm-10">
-                                    <input type="datetime-local" class="form-control" name="date_of_the_new_story" id="date_of_the_new_story" value="{{ old('date_of_the_new_story') }}" required>
+                                <div class="col-sm-7">
+                                    <input type="datetime-local" class="form-control" name="date_of_the_new_story" id="date_of_the_new_story" placeholder="Ingrese la Fecha de la Noticia" value="{{ old('date_of_the_new_story') }}">
+                                    @if ($errors->has('date_of_the_new_story'))
+                                    <span class="invalid-feedback" role="alert">{{ $errors->first('date_of_the_new_story') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer ml-auto mr-auto">
-                            <button type="button" class="btn btn-info" id="submitForm">Crear</button>
+                            <button type="submit" class="btn btn-info">Guardar</button>
                             <a href="{{ route('news.index') }}" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
@@ -69,63 +73,72 @@
 @endsection
 
 @section('js')
-<script>
-    Dropzone.autoDiscover = false;
+    <script>
+        Dropzone.autoDiscover = false;
 
-    $(document).ready(function() {
-        if (!Dropzone.instances.length) { // Comprobación para asegurar que no haya instancias previas
+        if (!document.getElementById("dropzoneNews").classList.contains("dz-clickable")) {
             var dropzoneNews = new Dropzone("#dropzoneNews", {
                 url: "{{ route('news.store') }}",
-                paramName: "images",
-                maxFilesize: 5, // Tamaño máximo de archivo en MB
-                acceptedFiles: 'image/*', // Tipos de archivo permitidos
-                autoProcessQueue: false, // No procesar archivos automáticamente
-                parallelUploads: 10, // Número de archivos a subir simultáneamente
+                paramName: "url",
+                maxFilesize: 5, // Tamaño máximo en MB
+                acceptedFiles: 'image/*',
+                dictDefaultMessage: "Haz clic o arrastra y suelta los archivos aquí para subirlos",
+                dictFallbackText: "Por favor utiliza el formulario de reserva para subir tus archivos como en los viejos tiempos.",
+                dictInvalidFileType: "No puedes subir archivos de este tipo.",
+                dictCancelUpload: "Cancelar subida",
+                dictCancelUploadConfirmation: "¿Estás seguro de que deseas cancelar esta subida?",
+                dictRemoveFile: "Eliminar archivo",
+                dictMaxFilesExceeded: "No puedes subir más archivos.",
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
+                autoProcessQueue: false,
+                addRemoveLinks: true,
                 init: function() {
-                    var submitButton = document.querySelector("#submitForm");
-                    var myDropzone = this; // Closure
+                    var myDropzone = this;
 
-                    submitButton.addEventListener("click", function(e) {
+                    document.querySelector("#newsForm button[type=submit]").addEventListener("click", function(e) {
                         e.preventDefault();
                         e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
 
-                        if (myDropzone.getQueuedFiles().length > 0) {
-                            myDropzone.processQueue(); // Subir archivos
+                    this.on("sending", function(file, xhr, formData) {
+                        formData.append("title", document.getElementById("title").value);
+                        formData.append("description", document.getElementById("description").value);
+                        formData.append("content", document.getElementById("content").value);
+                        formData.append("date_of_the_new_story", document.getElementById("date_of_the_new_story").value);
+                    });
+
+                    this.on("success", function(file, response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Noticia creada exitosamente.',
+                                showConfirmButton: false,
+                                timer: 1500 // Duración del mensaje en milisegundos
+                            }).then(() => {
+                                window.location.href = "{{ route('news.show', ':id') }}".replace(':id', response.id);
+                            });
                         } else {
-                            // No hay archivos en la cola, enviar formulario manualmente
-                            document.querySelector("#newsForm").submit();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al subir la imagen',
+                                showConfirmButton: false,
+                                timer: 1500 // Duración del mensaje en milisegundos
+                            });
                         }
                     });
-
-                    this.on("sendingmultiple", function(file, xhr, formData) {
-                        // Añadir todos los campos del formulario a la solicitud
-                        $("#newsForm").serializeArray().forEach(function(field) {
-                            formData.append(field.name, field.value);
-                        });
-                    });
-
-                    this.on("successmultiple", function(files, response) {
-                        // Manejo de la respuesta exitosa
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Noticia creada exitosamente.',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(() => {
-                            window.location.href = "{{ route('news.index') }}";
-                        });
-                    });
-
-                    this.on("errormultiple", function(files, response) {
-                        // Manejo de errores
-                        $('#images-error').text(response.message || 'Error al subir las imágenes.');
+                    
+                    this.on("error", function(file, response) {
+                        if (typeof response.message !== "undefined") {
+                            alert(response.message);
+                        } else {
+                            alert("Error al subir la imagen");
+                        }
                     });
                 }
             });
         }
-    });
-</script>
+    </script>
 @endsection
