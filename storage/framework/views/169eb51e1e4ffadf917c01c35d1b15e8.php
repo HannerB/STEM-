@@ -258,7 +258,100 @@
 		padding-top: 0.2em;
 		padding-bottom: 0.2em;
 	}
-
+    .pagination-wrap {
+        position: relative;
+        padding: 20px 80px;
+        text-align: center;
+        max-width: 570px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        font: 22px/28px 'Source Sans Pro', Arial, Helvetica, sans-serif;
+    }
+    
+    .pagination > li {
+        display: inline-block;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+    }
+    
+    .pagination > li.points {
+        min-width: 29px;
+        vertical-align: top;
+    }
+    
+    .pagination > li > a, .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        line-height: 1.428571429;
+        text-decoration: none;
+        color: #009b47;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-left: -1px;
+    }
+    
+    .pagination > li.prev > a:before, 
+    .pagination > li.next > a:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 16px;
+        height: 16px;
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+    }
+    
+    .pagination > li.prev > a, 
+    .pagination > li.next > a {
+        font-size: 0;
+        line-height: 0;
+    }
+    
+    .pagination > li > a {
+        border: 0;
+        margin-left: 4px;
+        margin-right: 4px;
+        min-width: 29px;
+        min-height: 26px;
+        line-height: inherit;
+        padding: 0 3px;
+        color: #424242;
+    }
+    
+    .pagination-wrap .pagination .page-item .page-link.no-border {
+        border: none;
+        background-color: transparent;
+        pointer-events: none; /* Para asegurarse de que no sean interactivos */
+    }
+    
+    .pagination-wrap .pagination .page-item.disabled .page-link {
+        cursor: default;
+        background-color: transparent;
+    }
+    
+    .pagination-wrap .pagination .page-item .page-link {
+        margin: 0 2px; /* Ajuste del margen entre elementos */
+    }
+    
+    .article-section {
+        background: #fff;
+        margin-top: -447px;
+        padding: 22px 101px 100px;
+        font: 22px / 28px 'Source Sans Pro', Arial, Helvetica, sans-serif;
+        font-size: 22px;
+        line-height: 1.273em;
+        letter-spacing: -0.3px;
+        position: relative;
+    }
+    
+    
 </style>
 
 <script>

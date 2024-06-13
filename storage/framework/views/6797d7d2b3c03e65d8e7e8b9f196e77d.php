@@ -35,7 +35,13 @@
                                         <tr>
                                             <td><?php echo e($item->id); ?></td>
                                             <td><?php echo e($item->title); ?></td>
-                                            <td><img src="<?php echo e(asset($item->url)); ?>" alt="<?php echo e($item->slug); ?>" style="max-width: 100px;"></td>
+                                            <td>
+                                                <?php if($item->images): ?>
+                                                    <img src="<?php echo e(asset($item->images->url)); ?>" alt="<?php echo e($item->slug); ?>" style="max-width: 100px;">
+                                                <?php else: ?>
+                                                    <span>No hay imagen principal</span>
+                                                <?php endif; ?>
+                                            </td>
                                             <td><?php echo e($item->date_of_the_new_story); ?></td>
                                             <td>
                                                 <span class="badge <?php echo e($item->state == 1 ? 'badge-success' : 'badge-danger'); ?>">
@@ -70,27 +76,40 @@
                         <div class="card-footer text-right">
                             <ul class="pagination">
                                 
-                                <li class="page-item <?php echo e($news->onFirstPage() ? 'disabled' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($news->previousPageUrl()); ?>" aria-label="Previous">
-                                        &laquo;
-                                    </a>
-                                </li>
+                                <?php if($news->hasPages()): ?>
+                                    
+                                    <?php if(!$news->onFirstPage()): ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo e($news->previousPageUrl()); ?>" tabindex="-1" aria-disabled="true">&laquo;</a>
+                                        </li>
+                                    <?php endif; ?>
                         
-                                
-                                <?php for($i = 1; $i <= $news->lastPage(); $i++): ?>
-                                    <li class="page-item <?php echo e($i == $news->currentPage() ? 'active' : ''); ?>">
-                                        <a class="page-link" href="<?php echo e($news->url($i)); ?>"><?php echo e($i); ?></a>
-                                    </li>
-                                <?php endfor; ?>
+                                    
+                                    <?php $__currentLoopData = $news->getUrlRange(1, $news->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($page == 1 || $page == $news->lastPage() || ($page >= max(1, $news->currentPage() - 1) && $page <= min($news->lastPage(), $news->currentPage() + 1))): ?>
+                                            <li class="page-item <?php echo e($page == $news->currentPage() ? 'active' : ''); ?>">
+                                                <a class="page-link" href="<?php echo e($url); ?>"><?php echo e($page); ?></a>
+                                            </li>
+                                        <?php elseif($page == 2 && $news->currentPage() > 3): ?>
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&hellip;</span>
+                                            </li>
+                                        <?php elseif($page == $news->lastPage() - 1 && $news->currentPage() < $news->lastPage() - 2): ?>
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&hellip;</span>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         
-                                
-                                <li class="page-item <?php echo e($news->currentPage() == $news->lastPage() ? 'disabled' : ''); ?>">
-                                    <a class="page-link" href="<?php echo e($news->nextPageUrl()); ?>" aria-label="Next">
-                                        &raquo;
-                                    </a>
-                                </li>
+                                    
+                                    <?php if($news->hasMorePages()): ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo e($news->nextPageUrl()); ?>">&raquo;</a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </ul>
-                        </div>
+                        </div>                                                                                                                                                                                                                                                                                         
                     </div>
                 </div>
             </div>
